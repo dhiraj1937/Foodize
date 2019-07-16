@@ -62,7 +62,7 @@ export default class LocationListView extends Component {
             alignItems: "flex-start",
             alignItems: "center",
             marginLeft: 15,
-            marginTop: 40,
+            marginTop: 50,
             flexDirection: "row",
             flex: 0
           }}

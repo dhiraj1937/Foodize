@@ -328,8 +328,8 @@ const styles = StyleSheet.create({
     backgroundColor: "red"
   },
   backImageStyle: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     position: "absolute",
     left: 10,
     top: 20

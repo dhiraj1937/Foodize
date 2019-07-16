@@ -135,7 +135,6 @@ export default class LocationDetailView extends Component {
             </View>
           </View>
         </View>
-
         <Text
           style={{
             fontSize: 20,
@@ -177,7 +176,7 @@ export default class LocationDetailView extends Component {
                     color: "#000",
                     fontWeight: "bold",
                     marginLeft: 20,
-                    marginBottom: 20
+                    marginBottom: 0
                   }}
                 >
                   {data.name}
@@ -189,7 +188,9 @@ export default class LocationDetailView extends Component {
                     justifyContent: "flex-end",
                     marginRight: 20
                   }}
-                  onPress={() => this.props.navigation.pop()}
+                  onPress={() =>
+                    this.props.navigation.navigate("FoodCollection")
+                  }
                 >
                   <Text
                     style={{
@@ -211,8 +212,8 @@ export default class LocationDetailView extends Component {
                 showsHorizontalScrollIndicator={false}
                 style={{
                   height: 190,
-                  marginLeft: 10,
-                  marginRight: 10
+                  marginLeft: 5,
+                  marginRight: 5
                 }}
                 renderRow={data => (
                   <TouchableOpacity
@@ -224,7 +225,7 @@ export default class LocationDetailView extends Component {
                       <View>
                         <View style={styles.itemImageStyle}>
                           <Image
-                            style={{ width: 140, height: 110 }}
+                            style={{ width: 160, height: 110 }}
                             source={data.img}
                           />
                         </View>
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     height: 170,
     alignContent: "flex-start",
-    marginRight: 10,
+    marginRight: 5,
     marginTop: 0,
     marginBottom: 5,
     flex: 0,
@@ -315,11 +316,11 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   backImageStyle: {
-    width: 30,
-    height: 30
+    width: 25,
+    height: 25
   },
   itemImageStyle: {
-    width: 140,
+    width: 160,
     height: 100,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,

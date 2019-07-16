@@ -12,6 +12,7 @@ import Profile from "./ProfileView";
 import locationList from "./LocationListView";
 import locationDetail from "./LocationDetailView";
 import foodDetail from "./FoodDetailView";
+import foodCollection from "./FoodCollectionView";
 
 const insideHomeNavigator = createStackNavigator({
   Home: {
@@ -34,6 +35,12 @@ const insideHomeNavigator = createStackNavigator({
   },
   FoodDetail: {
     screen: foodDetail,
+    navigationOptions: {
+      header: null
+    }
+  },
+  FoodCollection: {
+    screen: foodCollection,
     navigationOptions: {
       header: null
     }

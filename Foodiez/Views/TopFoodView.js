@@ -294,8 +294,8 @@ const styles = StyleSheet.create({
   },
 
   backImageStyle: {
-    width: 30,
-    height: 30
+    width: 25,
+    height: 25
   },
   headerSeperatorStyle: {
     backgroundColor: "lightgray",

@@ -123,7 +123,8 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
+      customArchiveName = "Foodiez"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

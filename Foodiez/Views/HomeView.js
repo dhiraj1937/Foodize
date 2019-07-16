@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     color: "#33FFC1"
   },
   backImageStyle: {
-    width: 30,
-    height: 30
+    width: 25,
+    height: 25
   }
 });

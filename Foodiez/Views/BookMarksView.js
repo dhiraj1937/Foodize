@@ -11,6 +11,12 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import PopupDialog, {
+  DialogTitle,
+  DialogButton,
+  ScaleAnimation
+} from "react-native-popup-dialog";
+const scaleAnimation = new ScaleAnimation();
 export default class BookMarksView extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +56,12 @@ export default class BookMarksView extends Component {
       ])
     };
   }
+
+  showScaleAnimationDialog = () => {
+    this.scaleAnimationDialog.show(() => {
+      console.log("callback - will be called immediately");
+    });
+  };
 
   onSearch = searchText => {
     return new Promise((resolve, reject) => {
@@ -249,6 +261,25 @@ export default class BookMarksView extends Component {
             </View>
           )}
         />
+        <PopupDialog
+          ref={scaleAnimationDialog => {
+            this.scaleAnimationDialog = scaleAnimationDialog;
+          }}
+          dialogAnimation={scaleAnimation}
+          dialogTitle={<DialogTitle title="Scale Animation Dialog Sample" />}
+          actions={[
+            <DialogButton
+              text="Close"
+              onPress={() => {
+                this.scaleAnimationDialog.dismiss();
+              }}
+            />
+          ]}
+        >
+          <View style={styles.dialogContentView}>
+            <Text>Here is an example of scale animation dialog.</Text>
+          </View>
+        </PopupDialog>
       </View>
     );
   }
