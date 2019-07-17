@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { SearchBar } from "react-native-elements";
+import CheckBox from "react-native-check-box";
+import { RadioGroup, RadioButton } from "react-native-flexi-radio-button";
 import {
   Platform,
   StyleSheet,
@@ -14,7 +16,8 @@ import {
 import PopupDialog, {
   DialogTitle,
   DialogButton,
-  ScaleAnimation
+  ScaleAnimation,
+  DialogContent
 } from "react-native-popup-dialog";
 const scaleAnimation = new ScaleAnimation();
 export default class BookMarksView extends Component {
@@ -53,14 +56,14 @@ export default class BookMarksView extends Component {
           name: "Japan",
           icon: require("../Images/CountryFlags/Japan.png")
         }
-      ])
+      ]),
+      IsShowPopup: false,
+      checked: false
     };
   }
 
   showScaleAnimationDialog = () => {
-    this.scaleAnimationDialog.show(() => {
-      console.log("callback - will be called immediately");
-    });
+    this.setState({ IsShowPopup: true });
   };
 
   onSearch = searchText => {
@@ -70,6 +73,7 @@ export default class BookMarksView extends Component {
       resolve();
     });
   };
+
   render() {
     return (
       <View
@@ -119,6 +123,7 @@ export default class BookMarksView extends Component {
               marginBottom: 10,
               marginRight: 10
             }}
+            onPress={this.showScaleAnimationDialog}
           >
             <Text
               style={{ marginLeft: 10, fontWeight: "bold", color: "#4c7f7f" }}
@@ -127,6 +132,7 @@ export default class BookMarksView extends Component {
             </Text>
           </TouchableOpacity>
         </View>
+
         <ListView
           dataSource={this.state.dataSource}
           separatorStyle="none"
@@ -262,23 +268,244 @@ export default class BookMarksView extends Component {
           )}
         />
         <PopupDialog
-          ref={scaleAnimationDialog => {
-            this.scaleAnimationDialog = scaleAnimationDialog;
+          visible={this.state.IsShowPopup}
+          ref={popupDialog => {
+            this.popupDialog = popupDialog;
           }}
           dialogAnimation={scaleAnimation}
-          dialogTitle={<DialogTitle title="Scale Animation Dialog Sample" />}
-          actions={[
-            <DialogButton
-              text="Close"
-              onPress={() => {
-                this.scaleAnimationDialog.dismiss();
-              }}
-            />
-          ]}
+          actions={[<View />]}
         >
-          <View style={styles.dialogContentView}>
-            <Text>Here is an example of scale animation dialog.</Text>
+          <View
+            style={[styles.dialogContentView, { backgroundColor: "#f5f5f5" }]}
+          >
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginRight: 10,
+                marginLeft: 10
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Filter</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-end",
+                justifyContent: "center",
+                marginRight: 10
+              }}
+            >
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => this.setState({ IsShowPopup: false })}
+              >
+                <Text style={{ color: "#4c7f7f", fontSize: 15 }}> Reset </Text>
+              </TouchableOpacity>
+            </View>
           </View>
+
+          <DialogContent style={styles.dialogContentViewStyle}>
+            <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
+              Quick Filter
+            </Text>
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>Open Now</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: !this.state.checked
+                    });
+                  }}
+                  isChecked={this.state.checked}
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>Rated 4+</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: !this.state.checked
+                    });
+                  }}
+                  isChecked={this.state.checked}
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>Rated 3+</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: !this.state.checked
+                    });
+                  }}
+                  isChecked={this.state.checked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckbox.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkbox.png")} />
+                  }
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+
+            <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
+              Sort By
+            </Text>
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>Nearest to me</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                {/* <RadioButton value={"item1"}>
+                  <Text>This is item #1</Text>
+                </RadioButton> */}
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>Cost high to low</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: !this.state.checked
+                    });
+                  }}
+                  isChecked={this.state.checked}
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>Cost low to height</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: !this.state.checked
+                    });
+                  }}
+                  isChecked={this.state.checked}
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+
+            <View>
+              <TouchableOpacity
+                style={[styles.buttonStyle, { backgroundColor: "gray" }]}
+                activeOpacity={0.5}
+                onPress={() => this.setState({ IsShowPopup: false })}
+              >
+                <Text style={{ color: "white", fontSize: 17 }}> Apply </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.buttonStyle, { backgroundColor: "#fff" }]}
+                activeOpacity={0.5}
+                onPress={() => this.setState({ IsShowPopup: false })}
+              >
+                <Text style={{ color: "gray", fontSize: 17 }}> Cancel </Text>
+              </TouchableOpacity>
+            </View>
+          </DialogContent>
         </PopupDialog>
       </View>
     );
@@ -297,20 +524,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 5
   },
-  boxRightStyle: {
-    width: Dimensions.get("window").width / 2.3,
-    height: Dimensions.get("window").width / 2.3,
-    marginLeft: 5,
-    marginRight: 20,
-    marginTop: 5,
-    borderRadius: 5
-  },
+
   SearchBarStyle: {
     backgroundColor: "white"
   },
   SearchBarInputContainerStyle: {
-    backgroundColor: "#f5f5f5",
-    fontSize: 16
+    backgroundColor: "#f5f5f5"
+    //fontSize: 16
   },
   listItemStyle: {
     flexDirection: "row",
@@ -333,5 +553,46 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginTop: 5,
     borderRadius: 5
+  },
+  dialogContentView: {
+    flex: 0,
+    flexDirection: "row",
+    height: 50
+  },
+  dialogContentViewStyle: {
+    height:
+      Dimensions.get("window").height -
+      (Dimensions.get("window").height * 30) / 100,
+    width:
+      Dimensions.get("window").width -
+      (Dimensions.get("window").width * 10) / 100,
+    backgroundColor: "#dfdf"
+  },
+  buttonStyle: {
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#ffcc",
+
+    marginTop: 20,
+    height: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "stretch",
+    marginLeft: 5,
+    marginRight: 5,
+    elevation: 2,
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    }
+  },
+  separatorStyle: {
+    borderBottomColor: "#d3d3d3",
+    borderBottomWidth: 1,
+    marginLeft: 0,
+    marginRight: 0
   }
 });
