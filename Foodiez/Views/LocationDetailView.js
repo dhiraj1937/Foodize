@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { SearchBar } from "react-native-elements";
+import { CustomCellFav } from "../CustomViews/CustomCellMeals";
 import {
   Platform,
   StyleSheet,
@@ -85,6 +86,84 @@ export default class LocationDetailView extends Component {
       item: clickedItemValue
     });
   }
+
+  _renderCell = cell => {
+    return (
+      <View>
+        <View
+          style={{
+            width: 160,
+            height: 170,
+            justifyContent: "center",
+            borderRadius: 10,
+            resizeMode: "stretch"
+          }}
+        >
+          <View
+            style={{
+              width: 160,
+              height: 170,
+              justifyContent: "center",
+              borderRadius: 10,
+              resizeMode: "stretch",
+              overflow: "hidden"
+            }}
+          >
+            <Image style={{ width: 160, height: 170 }} source={cell.img} />
+          </View>
+          <View
+            style={{
+              position: "absolute",
+              justifyContent: "flex-end",
+              bottom: 2
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "left",
+                color: "#fff",
+                fontSize: 17,
+                marginLeft: 10,
+                fontWeight: "bold"
+              }}
+            >
+              Test
+            </Text>
+            <Text
+              style={{
+                textAlign: "left",
+                color: "#fff",
+                fontSize: 12,
+                marginLeft: 10,
+                fontWeight: "bold"
+              }}
+            >
+              Test
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  _renderCellForPopularRes = cell => {
+    return (
+      <View style={{ alignContent: "center" }}>
+        <View>
+          <View style={styles.addImageStyle}>
+            <Image source={cell.img} />
+          </View>
+          <Text
+            style={{
+              marginLeft: 10,
+              textAlign: "center"
+            }}
+          />
+        </View>
+      </View>
+    );
+  };
+
   render() {
     return (
       <View
@@ -160,9 +239,9 @@ export default class LocationDetailView extends Component {
           separatorStyle="none"
           removeClippedSubviews={false}
           style={{
-            height: (Dimensions.get("window").height * 70) / 100
+            height: (Dimensions.get("window").height * 68) / 100
           }}
-          renderRow={data => (
+          renderRow={dataHeader => (
             <View
               style={{
                 alignContent: "center",
@@ -179,7 +258,7 @@ export default class LocationDetailView extends Component {
                     marginBottom: 0
                   }}
                 >
-                  {data.name}
+                  {dataHeader.name}
                 </Text>
                 <TouchableOpacity
                   style={{
@@ -205,7 +284,7 @@ export default class LocationDetailView extends Component {
                 </TouchableOpacity>
               </View>
               <ListView
-                dataSource={data.foods}
+                dataSource={dataHeader.foods}
                 separatorStyle="none"
                 horizontal={true}
                 removeClippedSubviews={false}
@@ -221,40 +300,54 @@ export default class LocationDetailView extends Component {
                     activeOpacity={0.4}
                     onPress={this.clickedItemText.bind(this, data)}
                   >
-                    <View style={styles.listItemStyle}>
-                      <View>
-                        <View style={styles.itemImageStyle}>
-                          <Image
-                            style={{ width: 160, height: 110 }}
-                            source={data.img}
-                          />
+                    {dataHeader.name === "Meal Deals" ? (
+                      this._renderCell(data)
+                    ) : dataHeader.name === "Papular Restaurants" ? (
+                      this._renderCellForPopularRes(data)
+                    ) : dataHeader.name === "Favorites Cuisines" ? (
+                      <CustomCellFav
+                        boxTitle1="Asian"
+                        boxTitle2="France"
+                        bgColor1="blue"
+                        bgColor2="green"
+                        style={{ height: 170 }}
+                      />
+                    ) : (
+                      <View style={styles.listItemStyle}>
+                        <View>
+                          <View style={styles.itemImageStyle}>
+                            <Image
+                              style={{ width: 160, height: 110 }}
+                              source={data.img}
+                            />
+                          </View>
+                          <Text
+                            style={{
+                              fontSize: 16,
+                              fontWeight: "bold",
+                              marginLeft: 5,
+                              marginRight: 5,
+                              marginTop: 5,
+                              marginBottom: 5
+                            }}
+                          >
+                            KFC Boradway
+                          </Text>
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              color: "gray",
+                              marginLeft: 5,
+                              marginRight: 5,
+                              marginTop: 5,
+                              marginBottom: 15
+                            }}
+                          >
+                            123 Qeen Street, {"\n"}SydneyAustralian Cafe
+                          </Text>
                         </View>
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            fontWeight: "bold",
-                            marginLeft: 5,
-                            marginRight: 5,
-                            marginTop: 5,
-                            marginBottom: 5
-                          }}
-                        >
-                          KFC Boradway
-                        </Text>
-                        <Text
-                          style={{
-                            fontSize: 12,
-                            color: "gray",
-                            marginLeft: 5,
-                            marginRight: 5,
-                            marginTop: 5,
-                            marginBottom: 15
-                          }}
-                        >
-                          123 Qeen Street, {"\n"}SydneyAustralian Cafe
-                        </Text>
                       </View>
-                    </View>
+                    )}
                   </TouchableOpacity>
                 )}
               />
@@ -324,6 +417,12 @@ const styles = StyleSheet.create({
     height: 100,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+    overflow: "hidden"
+  },
+  addImageStyle: {
+    width: 160,
+    height: 170,
+    borderRadius: 5,
     overflow: "hidden"
   }
 });

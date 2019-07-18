@@ -20,6 +20,7 @@ import PopupDialog, {
   DialogContent
 } from "react-native-popup-dialog";
 const scaleAnimation = new ScaleAnimation();
+
 export default class BookMarksView extends Component {
   constructor(props) {
     super(props);
@@ -58,7 +59,15 @@ export default class BookMarksView extends Component {
         }
       ]),
       IsShowPopup: false,
-      checked: false
+      checked: true,
+      FilterArray: [
+        { key: "Open Now", IsChecked: false, IsQuickFilter: true },
+        { key: "Rated 4+", IsChecked: false, IsQuickFilter: true },
+        { key: "Rated 3+", IsChecked: false, IsQuickFilter: true },
+        { key: "Nearest to me", IsChecked: true, IsQuickFilter: false },
+        { key: "Cost low to high", IsChecked: false, IsQuickFilter: false },
+        { key: "Cost high to low", IsChecked: false, IsQuickFilter: false }
+      ]
     };
   }
 
@@ -72,6 +81,17 @@ export default class BookMarksView extends Component {
       console.log("Add your search function here.");
       resolve();
     });
+  };
+
+  _onReset = () => {
+    this.state.FilterArray[0].IsChecked = false;
+    this.state.FilterArray[1].IsChecked = false;
+    this.state.FilterArray[2].IsChecked = false;
+    this.state.FilterArray[3].IsChecked = true;
+    this.state.FilterArray[4].IsChecked = false;
+    this.state.FilterArray[5].IsChecked = false;
+    this.state.checked = true;
+    this.setState({ FilterArray: this.state.FilterArray });
   };
 
   render() {
@@ -297,10 +317,7 @@ export default class BookMarksView extends Component {
                 marginRight: 10
               }}
             >
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => this.setState({ IsShowPopup: false })}
-              >
+              <TouchableOpacity activeOpacity={0.5} onPress={this._onReset}>
                 <Text style={{ color: "#4c7f7f", fontSize: 15 }}> Reset </Text>
               </TouchableOpacity>
             </View>
@@ -318,7 +335,9 @@ export default class BookMarksView extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text style={{ fontSize: 15 }}>Open Now</Text>
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[0].key}
+                </Text>
               </View>
               <View
                 style={{
@@ -330,11 +349,17 @@ export default class BookMarksView extends Component {
                 <CheckBox
                   style={{ flex: 1, padding: 10 }}
                   onClick={() => {
-                    this.setState({
-                      checked: !this.state.checked
-                    });
+                    this.state.FilterArray[0].IsChecked = !this.state
+                      .FilterArray[0].IsChecked;
+                    this.setState({ FilterArray: this.state.FilterArray });
                   }}
-                  isChecked={this.state.checked}
+                  isChecked={this.state.FilterArray[0].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckbox.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkbox.png")} />
+                  }
                 />
               </View>
             </View>
@@ -347,7 +372,9 @@ export default class BookMarksView extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text style={{ fontSize: 15 }}>Rated 4+</Text>
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[1].key}
+                </Text>
               </View>
               <View
                 style={{
@@ -359,11 +386,17 @@ export default class BookMarksView extends Component {
                 <CheckBox
                   style={{ flex: 1, padding: 10 }}
                   onClick={() => {
-                    this.setState({
-                      checked: !this.state.checked
-                    });
+                    this.state.FilterArray[1].IsChecked = !this.state
+                      .FilterArray[1].IsChecked;
+                    this.setState({ FilterArray: this.state.FilterArray });
                   }}
-                  isChecked={this.state.checked}
+                  isChecked={this.state.FilterArray[1].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckbox.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkbox.png")} />
+                  }
                 />
               </View>
             </View>
@@ -376,7 +409,9 @@ export default class BookMarksView extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text style={{ fontSize: 15 }}>Rated 3+</Text>
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[2].key}
+                </Text>
               </View>
               <View
                 style={{
@@ -388,11 +423,11 @@ export default class BookMarksView extends Component {
                 <CheckBox
                   style={{ flex: 1, padding: 10 }}
                   onClick={() => {
-                    this.setState({
-                      checked: !this.state.checked
-                    });
+                    this.state.FilterArray[2].IsChecked = !this.state
+                      .FilterArray[2].IsChecked;
+                    this.setState({ FilterArray: this.state.FilterArray });
                   }}
-                  isChecked={this.state.checked}
+                  isChecked={this.state.FilterArray[2].IsChecked}
                   unCheckedImage={
                     <Image source={require("../Images/uncheckbox.png")} />
                   }
@@ -415,30 +450,9 @@ export default class BookMarksView extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text style={{ fontSize: 15 }}>Nearest to me</Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                {/* <RadioButton value={"item1"}>
-                  <Text>This is item #1</Text>
-                </RadioButton> */}
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>Cost high to low</Text>
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[3].key}
+                </Text>
               </View>
               <View
                 style={{
@@ -451,10 +465,19 @@ export default class BookMarksView extends Component {
                   style={{ flex: 1, padding: 10 }}
                   onClick={() => {
                     this.setState({
-                      checked: !this.state.checked
+                      checked: true
                     });
+                    this.state.FilterArray[3].IsChecked = this.state.checked;
+                    this.state.FilterArray[4].IsChecked = !this.state.checked;
+                    this.state.FilterArray[5].IsChecked = !this.state.checked;
                   }}
-                  isChecked={this.state.checked}
+                  isChecked={this.state.FilterArray[3].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckRadio.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkedRadio.png")} />
+                  }
                 />
               </View>
             </View>
@@ -467,7 +490,9 @@ export default class BookMarksView extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text style={{ fontSize: 15 }}>Cost low to height</Text>
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[4].key}
+                </Text>
               </View>
               <View
                 style={{
@@ -480,10 +505,59 @@ export default class BookMarksView extends Component {
                   style={{ flex: 1, padding: 10 }}
                   onClick={() => {
                     this.setState({
-                      checked: !this.state.checked
+                      checked: true
                     });
+                    this.state.FilterArray[4].IsChecked = this.state.checked;
+                    this.state.FilterArray[5].IsChecked = !this.state.checked;
+                    this.state.FilterArray[3].IsChecked = !this.state.checked;
                   }}
-                  isChecked={this.state.checked}
+                  isChecked={this.state.FilterArray[4].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckRadio.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkedRadio.png")} />
+                  }
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[5].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: true
+                    });
+                    this.state.FilterArray[5].IsChecked = this.state.checked;
+                    this.state.FilterArray[3].IsChecked = !this.state.checked;
+                    this.state.FilterArray[4].IsChecked = !this.state.checked;
+                  }}
+                  isChecked={this.state.FilterArray[5].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckRadio.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkedRadio.png")} />
+                  }
                 />
               </View>
             </View>
@@ -565,14 +639,12 @@ const styles = StyleSheet.create({
       (Dimensions.get("window").height * 30) / 100,
     width:
       Dimensions.get("window").width -
-      (Dimensions.get("window").width * 10) / 100,
-    backgroundColor: "#dfdf"
+      (Dimensions.get("window").width * 10) / 100
   },
   buttonStyle: {
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#ffcc",
-
     marginTop: 20,
     height: 50,
     flexDirection: "row",
