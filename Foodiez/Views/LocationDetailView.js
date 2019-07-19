@@ -26,48 +26,53 @@ export default class LocationDetailView extends Component {
     this.state = {
       dataSource: ds.cloneWithRows([
         {
+          type: 1,
           name: "Most Popular",
           icon: require("../Images/CountryFlags/usa.png"),
           foods: dsInside.cloneWithRows([
-            { img: require("../Images/food1.png") },
-            { img: require("../Images/food1.png") },
-            { img: require("../Images/food1.png") }
+            { img: require("../Images/food1.png"), type: 1 },
+            { img: require("../Images/food1.png"), type: 1 },
+            { img: require("../Images/food1.png"), type: 1 }
           ])
         },
         {
+          type: 2,
           name: "Trending this week",
           icon: require("../Images/CountryFlags/australia.png"),
           foods: dsInside.cloneWithRows([
-            { img: require("../Images/food2.png") },
-            { img: require("../Images/food2.png") },
-            { img: require("../Images/food2.png") }
+            { img: require("../Images/food2.png"), type: 2 },
+            { img: require("../Images/food2.png"), type: 2 },
+            { img: require("../Images/food2.png"), type: 2 }
           ])
         },
         {
+          type: 3,
           name: "Meal Deals",
           icon: require("../Images/CountryFlags/france.png"),
           foods: dsInside.cloneWithRows([
-            { img: require("../Images/food3.png") },
-            { img: require("../Images/food3.png") },
-            { img: require("../Images/food3.png") }
+            { img: require("../Images/food3.png"), type: 3 },
+            { img: require("../Images/food3.png"), type: 3 },
+            { img: require("../Images/food3.png"), type: 3 }
           ])
         },
         {
+          type: 4,
           name: "Favorites Cuisines",
           icon: require("../Images/CountryFlags/northkorea.png"),
           foods: dsInside.cloneWithRows([
-            { img: require("../Images/food4.png") },
-            { img: require("../Images/food4.png") },
-            { img: require("../Images/food4.png") }
+            { img: require("../Images/food4.png"), type: 4 },
+            { img: require("../Images/food4.png"), type: 4 },
+            { img: require("../Images/food4.png"), type: 4 }
           ])
         },
         {
+          type: 5,
           name: "Papular Restaurants",
           icon: require("../Images/CountryFlags/brazil.png"),
           foods: dsInside.cloneWithRows([
-            { img: require("../Images/food5.png") },
-            { img: require("../Images/food5.png") },
-            { img: require("../Images/food5.png") }
+            { img: require("../Images/food5.png"), type: 5 },
+            { img: require("../Images/food5.png"), type: 5 },
+            { img: require("../Images/food5.png"), type: 5 }
           ])
         }
       ])
@@ -82,9 +87,15 @@ export default class LocationDetailView extends Component {
     });
   };
   clickedItemText(clickedItemValue) {
-    this.props.navigation.navigate("FoodDetail", {
-      item: clickedItemValue
-    });
+    if (clickedItemValue.type == 4) {
+      this.props.navigation.navigate("FavoriteCuisinesView", {
+        item: clickedItemValue
+      });
+    } else {
+      this.props.navigation.navigate("FoodDetail", {
+        item: clickedItemValue
+      });
+    }
   }
 
   _renderCell = cell => {
@@ -92,8 +103,8 @@ export default class LocationDetailView extends Component {
       <View>
         <View
           style={{
-            width: 160,
-            height: 170,
+            width: 180,
+            height: 200,
             justifyContent: "center",
             borderRadius: 10,
             resizeMode: "stretch"
@@ -101,15 +112,23 @@ export default class LocationDetailView extends Component {
         >
           <View
             style={{
-              width: 160,
-              height: 170,
+              width: 180,
+              height: 200,
               justifyContent: "center",
               borderRadius: 10,
               resizeMode: "stretch",
               overflow: "hidden"
             }}
           >
-            <Image style={{ width: 160, height: 170 }} source={cell.img} />
+            <Image
+              style={{
+                width: 180,
+                height: 200,
+                borderRadius: 10,
+                overflow: "hidden"
+              }}
+              source={cell.img}
+            />
           </View>
           <View
             style={{
@@ -127,7 +146,7 @@ export default class LocationDetailView extends Component {
                 fontWeight: "bold"
               }}
             >
-              Test
+              Greek Style
             </Text>
             <Text
               style={{
@@ -138,7 +157,7 @@ export default class LocationDetailView extends Component {
                 fontWeight: "bold"
               }}
             >
-              Test
+              30 Pices
             </Text>
           </View>
         </View>
@@ -148,17 +167,9 @@ export default class LocationDetailView extends Component {
 
   _renderCellForPopularRes = cell => {
     return (
-      <View style={{ alignContent: "center" }}>
-        <View>
-          <View style={styles.addImageStyle}>
-            <Image source={cell.img} />
-          </View>
-          <Text
-            style={{
-              marginLeft: 10,
-              textAlign: "center"
-            }}
-          />
+      <View style={styles.addImageStyle}>
+        <View style={styles.addImageStyle}>
+          <Image source={cell.img} />
         </View>
       </View>
     );
@@ -248,13 +259,19 @@ export default class LocationDetailView extends Component {
                 backgroundColor: "#f5f5f5"
               }}
             >
-              <View style={{ flex: 1, flexDirection: "row", marginTop: 10 }}>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  marginTop: 10
+                }}
+              >
                 <Text
                   style={{
                     fontSize: 20,
                     color: "#000",
                     fontWeight: "bold",
-                    marginLeft: 20,
+                    marginLeft: 15,
                     marginBottom: 0
                   }}
                 >
@@ -265,11 +282,15 @@ export default class LocationDetailView extends Component {
                     flex: 1,
                     alignItems: "flex-end",
                     justifyContent: "flex-end",
-                    marginRight: 20
+                    marginRight: 15
                   }}
-                  onPress={() =>
-                    this.props.navigation.navigate("FoodCollection")
-                  }
+                  onPress={() => {
+                    if (dataHeader.type == 2) {
+                      this.props.navigation.navigate("TrendingFoodView");
+                    } else {
+                      this.props.navigation.navigate("FoodCollection");
+                    }
+                  }}
                 >
                   <Text
                     style={{
@@ -290,13 +311,13 @@ export default class LocationDetailView extends Component {
                 removeClippedSubviews={false}
                 showsHorizontalScrollIndicator={false}
                 style={{
-                  height: 190,
+                  height: 220,
                   marginLeft: 5,
                   marginRight: 5
                 }}
                 renderRow={data => (
                   <TouchableOpacity
-                    style={{ padding: 15 }}
+                    style={{ marginLeft: 10, marginRight: 10 }}
                     activeOpacity={0.4}
                     onPress={this.clickedItemText.bind(this, data)}
                   >
@@ -308,16 +329,16 @@ export default class LocationDetailView extends Component {
                       <CustomCellFav
                         boxTitle1="Asian"
                         boxTitle2="France"
-                        bgColor1="blue"
-                        bgColor2="green"
-                        style={{ height: 170 }}
+                        bgColor1="#6495ed"
+                        bgColor2="#ffcc2a"
+                        style={{ height: 200 }}
                       />
                     ) : (
                       <View style={styles.listItemStyle}>
                         <View>
                           <View style={styles.itemImageStyle}>
                             <Image
-                              style={{ width: 160, height: 110 }}
+                              style={{ width: 180, height: 120 }}
                               source={data.img}
                             />
                           </View>
@@ -389,7 +410,7 @@ const styles = StyleSheet.create({
   listItemStyle: {
     flexDirection: "column",
     marginLeft: 0,
-    height: 170,
+    height: 200,
     alignContent: "flex-start",
     marginRight: 5,
     marginTop: 0,
@@ -413,16 +434,17 @@ const styles = StyleSheet.create({
     height: 25
   },
   itemImageStyle: {
-    width: 160,
-    height: 100,
+    width: 180,
+    height: 120,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     overflow: "hidden"
   },
   addImageStyle: {
-    width: 160,
-    height: 170,
+    width: 180,
+    height: 200,
     borderRadius: 5,
-    overflow: "hidden"
+    overflow: "hidden",
+    marginBottom: 10
   }
 });

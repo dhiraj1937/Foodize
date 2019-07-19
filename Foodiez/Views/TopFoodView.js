@@ -248,7 +248,7 @@ export default class TopFoodView extends Component {
                     </Text>
                     <Text
                       style={{
-                        color: "yellow",
+                        color: "#ffcc2a",
                         fontSize: 13,
                         flex: 0,
                         flexWrap: "wrap",

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { SearchBar } from "react-native-elements";
-import CheckBox from "react-native-check-box";
-import { RadioGroup, RadioButton } from "react-native-flexi-radio-button";
+import { FilterPopupView } from "../CustomViews/FilterPopupView";
 import {
   Platform,
   StyleSheet,
@@ -12,14 +11,6 @@ import {
   Dimensions,
   TouchableOpacity
 } from "react-native";
-
-import PopupDialog, {
-  DialogTitle,
-  DialogButton,
-  ScaleAnimation,
-  DialogContent
-} from "react-native-popup-dialog";
-const scaleAnimation = new ScaleAnimation();
 
 export default class BookMarksView extends Component {
   constructor(props) {
@@ -58,16 +49,7 @@ export default class BookMarksView extends Component {
           icon: require("../Images/CountryFlags/Japan.png")
         }
       ]),
-      IsShowPopup: false,
-      checked: true,
-      FilterArray: [
-        { key: "Open Now", IsChecked: false, IsQuickFilter: true },
-        { key: "Rated 4+", IsChecked: false, IsQuickFilter: true },
-        { key: "Rated 3+", IsChecked: false, IsQuickFilter: true },
-        { key: "Nearest to me", IsChecked: true, IsQuickFilter: false },
-        { key: "Cost low to high", IsChecked: false, IsQuickFilter: false },
-        { key: "Cost high to low", IsChecked: false, IsQuickFilter: false }
-      ]
+      IsShowPopup: false
     };
   }
 
@@ -81,17 +63,6 @@ export default class BookMarksView extends Component {
       console.log("Add your search function here.");
       resolve();
     });
-  };
-
-  _onReset = () => {
-    this.state.FilterArray[0].IsChecked = false;
-    this.state.FilterArray[1].IsChecked = false;
-    this.state.FilterArray[2].IsChecked = false;
-    this.state.FilterArray[3].IsChecked = true;
-    this.state.FilterArray[4].IsChecked = false;
-    this.state.FilterArray[5].IsChecked = false;
-    this.state.checked = true;
-    this.setState({ FilterArray: this.state.FilterArray });
   };
 
   render() {
@@ -155,7 +126,6 @@ export default class BookMarksView extends Component {
 
         <ListView
           dataSource={this.state.dataSource}
-          separatorStyle="none"
           style={{
             height: (Dimensions.get("window").height * 70) / 100
           }}
@@ -281,306 +251,16 @@ export default class BookMarksView extends Component {
                     </View>
                   </View>
                 </View>
-                {/* <Image style={styles.backImageStyle} source={data.icon} />
-                <Text style={{ marginLeft: 10 }}>{data.name}</Text> */}
               </View>
             </View>
           )}
         />
-        <PopupDialog
-          visible={this.state.IsShowPopup}
-          ref={popupDialog => {
-            this.popupDialog = popupDialog;
+        <FilterPopupView
+          IsShowPopup={this.state.IsShowPopup}
+          onClose={() => {
+            this.setState({ IsShowPopup: false });
           }}
-          dialogAnimation={scaleAnimation}
-          actions={[<View />]}
-        >
-          <View
-            style={[styles.dialogContentView, { backgroundColor: "#f5f5f5" }]}
-          >
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center",
-                marginRight: 10,
-                marginLeft: 10
-              }}
-            >
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Filter</Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center",
-                marginRight: 10
-              }}
-            >
-              <TouchableOpacity activeOpacity={0.5} onPress={this._onReset}>
-                <Text style={{ color: "#4c7f7f", fontSize: 15 }}> Reset </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <DialogContent style={styles.dialogContentViewStyle}>
-            <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
-              Quick Filter
-            </Text>
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {this.state.FilterArray[0].key}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  onClick={() => {
-                    this.state.FilterArray[0].IsChecked = !this.state
-                      .FilterArray[0].IsChecked;
-                    this.setState({ FilterArray: this.state.FilterArray });
-                  }}
-                  isChecked={this.state.FilterArray[0].IsChecked}
-                  unCheckedImage={
-                    <Image source={require("../Images/uncheckbox.png")} />
-                  }
-                  checkedImage={
-                    <Image source={require("../Images/checkbox.png")} />
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {this.state.FilterArray[1].key}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  onClick={() => {
-                    this.state.FilterArray[1].IsChecked = !this.state
-                      .FilterArray[1].IsChecked;
-                    this.setState({ FilterArray: this.state.FilterArray });
-                  }}
-                  isChecked={this.state.FilterArray[1].IsChecked}
-                  unCheckedImage={
-                    <Image source={require("../Images/uncheckbox.png")} />
-                  }
-                  checkedImage={
-                    <Image source={require("../Images/checkbox.png")} />
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {this.state.FilterArray[2].key}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  onClick={() => {
-                    this.state.FilterArray[2].IsChecked = !this.state
-                      .FilterArray[2].IsChecked;
-                    this.setState({ FilterArray: this.state.FilterArray });
-                  }}
-                  isChecked={this.state.FilterArray[2].IsChecked}
-                  unCheckedImage={
-                    <Image source={require("../Images/uncheckbox.png")} />
-                  }
-                  checkedImage={
-                    <Image source={require("../Images/checkbox.png")} />
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-
-            <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
-              Sort By
-            </Text>
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {this.state.FilterArray[3].key}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  onClick={() => {
-                    this.setState({
-                      checked: true
-                    });
-                    this.state.FilterArray[3].IsChecked = this.state.checked;
-                    this.state.FilterArray[4].IsChecked = !this.state.checked;
-                    this.state.FilterArray[5].IsChecked = !this.state.checked;
-                  }}
-                  isChecked={this.state.FilterArray[3].IsChecked}
-                  unCheckedImage={
-                    <Image source={require("../Images/uncheckRadio.png")} />
-                  }
-                  checkedImage={
-                    <Image source={require("../Images/checkedRadio.png")} />
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {this.state.FilterArray[4].key}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  onClick={() => {
-                    this.setState({
-                      checked: true
-                    });
-                    this.state.FilterArray[4].IsChecked = this.state.checked;
-                    this.state.FilterArray[5].IsChecked = !this.state.checked;
-                    this.state.FilterArray[3].IsChecked = !this.state.checked;
-                  }}
-                  isChecked={this.state.FilterArray[4].IsChecked}
-                  unCheckedImage={
-                    <Image source={require("../Images/uncheckRadio.png")} />
-                  }
-                  checkedImage={
-                    <Image source={require("../Images/checkedRadio.png")} />
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-            <View style={styles.dialogContentView}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>
-                  {this.state.FilterArray[5].key}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center"
-                }}
-              >
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  onClick={() => {
-                    this.setState({
-                      checked: true
-                    });
-                    this.state.FilterArray[5].IsChecked = this.state.checked;
-                    this.state.FilterArray[3].IsChecked = !this.state.checked;
-                    this.state.FilterArray[4].IsChecked = !this.state.checked;
-                  }}
-                  isChecked={this.state.FilterArray[5].IsChecked}
-                  unCheckedImage={
-                    <Image source={require("../Images/uncheckRadio.png")} />
-                  }
-                  checkedImage={
-                    <Image source={require("../Images/checkedRadio.png")} />
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.separatorStyle} />
-
-            <View>
-              <TouchableOpacity
-                style={[styles.buttonStyle, { backgroundColor: "gray" }]}
-                activeOpacity={0.5}
-                onPress={() => this.setState({ IsShowPopup: false })}
-              >
-                <Text style={{ color: "white", fontSize: 17 }}> Apply </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.buttonStyle, { backgroundColor: "#fff" }]}
-                activeOpacity={0.5}
-                onPress={() => this.setState({ IsShowPopup: false })}
-              >
-                <Text style={{ color: "gray", fontSize: 17 }}> Cancel </Text>
-              </TouchableOpacity>
-            </View>
-          </DialogContent>
-        </PopupDialog>
+        />
       </View>
     );
   }
@@ -591,13 +271,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8ff",
     marginTop: 10
   },
-  boxLeftStyle: {
-    width: Dimensions.get("window").width / 2.3,
-    height: Dimensions.get("window").width / 2.3,
-    margin: 12,
-    marginTop: 5,
-    borderRadius: 5
-  },
 
   SearchBarStyle: {
     backgroundColor: "white"
@@ -605,66 +278,5 @@ const styles = StyleSheet.create({
   SearchBarInputContainerStyle: {
     backgroundColor: "#f5f5f5"
     //fontSize: 16
-  },
-  listItemStyle: {
-    flexDirection: "row",
-    marginLeft: 15,
-    height: 120,
-    alignContent: "center",
-    marginRight: 15,
-    marginTop: 10,
-    marginBottom: 5,
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    borderRadius: 10,
-    backgroundColor: "#fff"
-  },
-  boxRightStyle: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").width / 2.3,
-    marginLeft: 10,
-    marginRight: 20,
-    marginTop: 5,
-    borderRadius: 5
-  },
-  dialogContentView: {
-    flex: 0,
-    flexDirection: "row",
-    height: 50
-  },
-  dialogContentViewStyle: {
-    height:
-      Dimensions.get("window").height -
-      (Dimensions.get("window").height * 30) / 100,
-    width:
-      Dimensions.get("window").width -
-      (Dimensions.get("window").width * 10) / 100
-  },
-  buttonStyle: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#ffcc",
-    marginTop: 20,
-    height: 50,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "stretch",
-    marginLeft: 5,
-    marginRight: 5,
-    elevation: 2,
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    }
-  },
-  separatorStyle: {
-    borderBottomColor: "#d3d3d3",
-    borderBottomWidth: 1,
-    marginLeft: 0,
-    marginRight: 0
   }
 });

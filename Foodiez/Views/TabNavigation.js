@@ -13,6 +13,9 @@ import locationList from "./LocationListView";
 import locationDetail from "./LocationDetailView";
 import foodDetail from "./FoodDetailView";
 import foodCollection from "./FoodCollectionView";
+import favoriteCuisinesView from "./FavoriteCuisinesView";
+import trendingFoodView from "./TrendingFoodView";
+import reviewView from "./ReviewView";
 
 const insideHomeNavigator = createStackNavigator({
   Home: {
@@ -41,6 +44,33 @@ const insideHomeNavigator = createStackNavigator({
   },
   FoodCollection: {
     screen: foodCollection,
+    navigationOptions: {
+      header: null
+    }
+  },
+  FavoriteCuisinesView: {
+    screen: favoriteCuisinesView,
+    navigationOptions: {
+      header: null
+    }
+  },
+  TrendingFoodView: {
+    screen: trendingFoodView,
+    navigationOptions: {
+      header: null
+    }
+  }
+});
+
+const insideNearbyNavigator = createStackNavigator({
+  NearBy: {
+    screen: NearBy,
+    navigationOptions: {
+      header: null
+    }
+  },
+  ReviewView: {
+    screen: reviewView,
     navigationOptions: {
       header: null
     }
@@ -78,8 +108,8 @@ const TabNavigator = createMaterialBottomTabNavigator(
       })
     },
     NearBy: {
-      screen: NearBy,
-      navigationOptions: {
+      screen: insideNearbyNavigator,
+      navigationOptions: ({ navigation }) => ({
         tabBarLabel: "Near By",
         tabBarIcon: ({ tintColor }) => (
           <View>
@@ -89,7 +119,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
         activeColor: "#ffcc2a",
         inactiveColor: "#b6b6b6",
         labeled: true
-      }
+      })
     },
     BookMark: {
       screen: BookMark,

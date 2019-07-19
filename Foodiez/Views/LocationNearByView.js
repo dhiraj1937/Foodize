@@ -81,6 +81,10 @@ export default class LocationNearByView extends Component {
     this._onChangeViewType();
   }
 
+  clickedItemText(clickedItemValue) {
+    this.props.navigation.navigate("ReviewView");
+  }
+
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
@@ -158,112 +162,125 @@ export default class LocationNearByView extends Component {
                   height: (Dimensions.get("window").height * 70) / 100
                 }}
                 renderRow={data => (
-                  <View
-                    style={{
-                      alignContent: "center",
-                      backgroundColor: "#f5f5f5"
-                    }}
+                  <TouchableOpacity
+                    activeOpacity={0.4}
+                    onPress={this.clickedItemText.bind(this, data)}
                   >
-                    <View style={styles.listItemStyle}>
-                      <View
-                        style={{
-                          flex: 0,
-                          flexDirection: "row",
-                          alignContent: "center",
-                          justifyContent: "space-between",
-                          alignItems: "center"
-                        }}
-                      >
-                        <Image
-                          source={require("./../Images/food2.png")}
-                          style={{
-                            width: 80,
-                            height: 80,
-                            borderRadius: 10,
-                            borderColor: "#f5f5f5",
-                            borderWidth: 1,
-                            marginLeft: 10
-                          }}
-                        />
+                    <View
+                      style={{
+                        alignContent: "center",
+                        backgroundColor: "#f5f5f5"
+                      }}
+                    >
+                      <View style={styles.listItemStyle}>
                         <View
                           style={{
-                            justifyContent: "center",
-                            marginLeft: 15,
-                            marginTop: 10
-                          }}
-                        >
-                          <Text
-                            style={{ color: "gray", fontSize: 10, height: 30 }}
-                          >
-                            11:30 AM to 11PM
-                          </Text>
-                          <Text
-                            style={{
-                              color: "black",
-                              fontSize: 13,
-                              fontWeight: "bold",
-                              height: 30
-                            }}
-                          >
-                            Good Thai
-                          </Text>
-                          <Text
-                            style={{ color: "gray", fontSize: 10, height: 30 }}
-                          >
-                            20 Queen street, NSW Asian, Thai
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            alignContent: "flex-end",
-                            marginLeft: 15,
+                            flex: 0,
+                            flexDirection: "row",
+                            alignContent: "center",
+                            justifyContent: "space-between",
                             alignItems: "center"
                           }}
                         >
+                          <Image
+                            source={require("./../Images/food2.png")}
+                            style={{
+                              width: 80,
+                              height: 80,
+                              borderRadius: 10,
+                              borderColor: "#f5f5f5",
+                              borderWidth: 1,
+                              marginLeft: 10
+                            }}
+                          />
                           <View
                             style={{
-                              borderRadius: 5,
-                              backgroundColor: "#ffcc2a",
-                              height: 30,
-                              alignItems: "center",
-                              marginTop: 20
+                              justifyContent: "center",
+                              marginLeft: 15,
+                              marginTop: 10
                             }}
                           >
                             <Text
                               style={{
                                 color: "gray",
-                                fontSize: 13,
-                                height: 30,
-                                width: 50,
-                                fontWeight: "bold",
-                                textAlign: "center",
-                                textAlignVertical: "center",
-                                marginTop: 5,
-                                marginBottom: 10
+                                fontSize: 10,
+                                height: 30
                               }}
                             >
-                              4.3
+                              11:30 AM to 11PM
+                            </Text>
+                            <Text
+                              style={{
+                                color: "black",
+                                fontSize: 13,
+                                fontWeight: "bold",
+                                height: 30
+                              }}
+                            >
+                              Good Thai
+                            </Text>
+                            <Text
+                              style={{
+                                color: "gray",
+                                fontSize: 10,
+                                height: 30
+                              }}
+                            >
+                              20 Queen street, NSW Asian, Thai
                             </Text>
                           </View>
                           <View
                             style={{
-                              justifyContent: "center",
-                              alignItems: "flex-end",
-                              height: 80
+                              alignContent: "flex-end",
+                              marginLeft: 15,
+                              alignItems: "center"
                             }}
                           >
-                            <Image
-                              source={require("./../Images/bookmarkgreen.png")}
+                            <View
                               style={{
-                                width: 20,
-                                height: 20
+                                borderRadius: 5,
+                                backgroundColor: "#ffcc2a",
+                                height: 30,
+                                alignItems: "center",
+                                marginTop: 20
                               }}
-                            />
+                            >
+                              <Text
+                                style={{
+                                  color: "gray",
+                                  fontSize: 13,
+                                  height: 30,
+                                  width: 50,
+                                  fontWeight: "bold",
+                                  textAlign: "center",
+                                  textAlignVertical: "center",
+                                  marginTop: 5,
+                                  marginBottom: 10
+                                }}
+                              >
+                                4.3
+                              </Text>
+                            </View>
+                            <View
+                              style={{
+                                justifyContent: "center",
+                                alignItems: "flex-end",
+                                height: 80
+                              }}
+                            >
+                              <Image
+                                source={require("./../Images/bookmarkgreen.png")}
+                                style={{
+                                  width: 20,
+                                  height: 20
+                                }}
+                              />
+                            </View>
                           </View>
                         </View>
                       </View>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 )}
               />
             </View>
