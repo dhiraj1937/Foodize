@@ -14,6 +14,7 @@ import PopupDialog, {
   ScaleAnimation,
   DialogContent
 } from "react-native-popup-dialog";
+import { ScrollView } from "react-native-gesture-handler";
 const scaleAnimation = new ScaleAnimation();
 
 export class FilterPopupView extends Component {
@@ -83,261 +84,263 @@ export class FilterPopupView extends Component {
         </View>
 
         <DialogContent style={styles.dialogContentViewStyle}>
-          <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
-            Quick Filter
-          </Text>
-          <View style={styles.dialogContentView}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>
-                {this.state.FilterArray[0].key}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center"
-              }}
-            >
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                onClick={() => {
-                  this.state.FilterArray[0].IsChecked = !this.state
-                    .FilterArray[0].IsChecked;
-                  this.setState({ FilterArray: this.state.FilterArray });
+          <ScrollView>
+            <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
+              Quick Filter
+            </Text>
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
                 }}
-                isChecked={this.state.FilterArray[0].IsChecked}
-                unCheckedImage={
-                  <Image source={require("../Images/uncheckbox.png")} />
-                }
-                checkedImage={
-                  <Image source={require("../Images/checkbox.png")} />
-                }
-              />
-            </View>
-          </View>
-          <View style={styles.separatorStyle} />
-          <View style={styles.dialogContentView}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>
-                {this.state.FilterArray[1].key}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center"
-              }}
-            >
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                onClick={() => {
-                  this.state.FilterArray[1].IsChecked = !this.state
-                    .FilterArray[1].IsChecked;
-                  this.setState({ FilterArray: this.state.FilterArray });
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[0].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
                 }}
-                isChecked={this.state.FilterArray[1].IsChecked}
-                unCheckedImage={
-                  <Image source={require("../Images/uncheckbox.png")} />
-                }
-                checkedImage={
-                  <Image source={require("../Images/checkbox.png")} />
-                }
-              />
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.state.FilterArray[0].IsChecked = !this.state
+                      .FilterArray[0].IsChecked;
+                    this.setState({ FilterArray: this.state.FilterArray });
+                  }}
+                  isChecked={this.state.FilterArray[0].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckbox.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkbox.png")} />
+                  }
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.separatorStyle} />
-          <View style={styles.dialogContentView}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>
-                {this.state.FilterArray[2].key}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center"
-              }}
-            >
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                onClick={() => {
-                  this.state.FilterArray[2].IsChecked = !this.state
-                    .FilterArray[2].IsChecked;
-                  this.setState({ FilterArray: this.state.FilterArray });
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
                 }}
-                isChecked={this.state.FilterArray[2].IsChecked}
-                unCheckedImage={
-                  <Image source={require("../Images/uncheckbox.png")} />
-                }
-                checkedImage={
-                  <Image source={require("../Images/checkbox.png")} />
-                }
-              />
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[1].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.state.FilterArray[1].IsChecked = !this.state
+                      .FilterArray[1].IsChecked;
+                    this.setState({ FilterArray: this.state.FilterArray });
+                  }}
+                  isChecked={this.state.FilterArray[1].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckbox.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkbox.png")} />
+                  }
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.separatorStyle} />
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[2].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.state.FilterArray[2].IsChecked = !this.state
+                      .FilterArray[2].IsChecked;
+                    this.setState({ FilterArray: this.state.FilterArray });
+                  }}
+                  isChecked={this.state.FilterArray[2].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckbox.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkbox.png")} />
+                  }
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
 
-          <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
-            Sort By
-          </Text>
-          <View style={styles.dialogContentView}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>
-                {this.state.FilterArray[3].key}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center"
-              }}
-            >
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                onClick={() => {
-                  this.setState({
-                    checked: true
-                  });
-                  this.state.FilterArray[3].IsChecked = this.state.checked;
-                  this.state.FilterArray[4].IsChecked = !this.state.checked;
-                  this.state.FilterArray[5].IsChecked = !this.state.checked;
+            <Text style={{ color: "gray", fontSize: 15, marginTop: 20 }}>
+              Sort By
+            </Text>
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
                 }}
-                isChecked={this.state.FilterArray[3].IsChecked}
-                unCheckedImage={
-                  <Image source={require("../Images/uncheckRadio.png")} />
-                }
-                checkedImage={
-                  <Image source={require("../Images/checkedRadio.png")} />
-                }
-              />
-            </View>
-          </View>
-          <View style={styles.separatorStyle} />
-          <View style={styles.dialogContentView}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>
-                {this.state.FilterArray[4].key}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center"
-              }}
-            >
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                onClick={() => {
-                  this.setState({
-                    checked: true
-                  });
-                  this.state.FilterArray[4].IsChecked = this.state.checked;
-                  this.state.FilterArray[5].IsChecked = !this.state.checked;
-                  this.state.FilterArray[3].IsChecked = !this.state.checked;
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[3].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
                 }}
-                isChecked={this.state.FilterArray[4].IsChecked}
-                unCheckedImage={
-                  <Image source={require("../Images/uncheckRadio.png")} />
-                }
-                checkedImage={
-                  <Image source={require("../Images/checkedRadio.png")} />
-                }
-              />
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: true
+                    });
+                    this.state.FilterArray[3].IsChecked = this.state.checked;
+                    this.state.FilterArray[4].IsChecked = !this.state.checked;
+                    this.state.FilterArray[5].IsChecked = !this.state.checked;
+                  }}
+                  isChecked={this.state.FilterArray[3].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckRadio.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkedRadio.png")} />
+                  }
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.separatorStyle} />
-          <View style={styles.dialogContentView}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>
-                {this.state.FilterArray[5].key}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center"
-              }}
-            >
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                onClick={() => {
-                  this.setState({
-                    checked: true
-                  });
-                  this.state.FilterArray[5].IsChecked = this.state.checked;
-                  this.state.FilterArray[3].IsChecked = !this.state.checked;
-                  this.state.FilterArray[4].IsChecked = !this.state.checked;
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
                 }}
-                isChecked={this.state.FilterArray[5].IsChecked}
-                unCheckedImage={
-                  <Image source={require("../Images/uncheckRadio.png")} />
-                }
-                checkedImage={
-                  <Image source={require("../Images/checkedRadio.png")} />
-                }
-              />
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[4].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: true
+                    });
+                    this.state.FilterArray[4].IsChecked = this.state.checked;
+                    this.state.FilterArray[5].IsChecked = !this.state.checked;
+                    this.state.FilterArray[3].IsChecked = !this.state.checked;
+                  }}
+                  isChecked={this.state.FilterArray[4].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckRadio.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkedRadio.png")} />
+                  }
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.separatorStyle} />
+            <View style={styles.separatorStyle} />
+            <View style={styles.dialogContentView}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={{ fontSize: 15 }}>
+                  {this.state.FilterArray[5].key}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-end",
+                  justifyContent: "center"
+                }}
+              >
+                <CheckBox
+                  style={{ flex: 1, padding: 10 }}
+                  onClick={() => {
+                    this.setState({
+                      checked: true
+                    });
+                    this.state.FilterArray[5].IsChecked = this.state.checked;
+                    this.state.FilterArray[3].IsChecked = !this.state.checked;
+                    this.state.FilterArray[4].IsChecked = !this.state.checked;
+                  }}
+                  isChecked={this.state.FilterArray[5].IsChecked}
+                  unCheckedImage={
+                    <Image source={require("../Images/uncheckRadio.png")} />
+                  }
+                  checkedImage={
+                    <Image source={require("../Images/checkedRadio.png")} />
+                  }
+                />
+              </View>
+            </View>
+            <View style={styles.separatorStyle} />
 
-          <View>
-            <TouchableOpacity
-              style={[styles.buttonStyle, { backgroundColor: "gray" }]}
-              activeOpacity={0.5}
-              onPress={() => this.props.onClose()}
-            >
-              <Text style={{ color: "white", fontSize: 17 }}> Apply </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.buttonStyle, { backgroundColor: "#fff" }]}
-              activeOpacity={0.5}
-              onPress={() => this.props.onClose()}
-            >
-              <Text style={{ color: "gray", fontSize: 17 }}> Cancel </Text>
-            </TouchableOpacity>
-          </View>
+            <View>
+              <TouchableOpacity
+                style={[styles.buttonStyle, { backgroundColor: "gray" }]}
+                activeOpacity={0.5}
+                onPress={() => this.props.onClose()}
+              >
+                <Text style={{ color: "white", fontSize: 17 }}> Apply </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.buttonStyle, { backgroundColor: "#fff" }]}
+                activeOpacity={0.5}
+                onPress={() => this.props.onClose()}
+              >
+                <Text style={{ color: "gray", fontSize: 17 }}> Cancel </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </DialogContent>
       </PopupDialog>
     );

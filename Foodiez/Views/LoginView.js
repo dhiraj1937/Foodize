@@ -8,78 +8,84 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 
 export default class LoginView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.header}>Welcome To Foodiez</Text>
-          <Text style={styles.headerSub}>Sign in to continue</Text>
-          <View style={styles.containerInside}>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Email"
-              keyboardType="email-address"
-            />
-            <View style={styles.separatorStyle} />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Password"
-              secureTextEntry={true}
-            />
-            <View style={styles.separatorStyle} />
+      <SafeAreaView>
+        <View style={styles.container}>
+          <ScrollView>
+            <Text style={styles.header}>Welcome To Foodiez</Text>
+            <Text style={styles.headerSub}>Sign in to continue</Text>
+            <View style={styles.containerInside}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Email"
+                keyboardType="email-address"
+              />
+              <View style={styles.separatorStyle} />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              <View style={styles.separatorStyle} />
 
-            <View>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => this.props.navigation.navigate("Forget")}
-                style={styles.btnForgetPasswordStyle}
-              >
-                <Text style={{ color: "#33FFC1" }}>Forget Password?</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View alignSelf="auto">
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={() => this.props.navigation.navigate("Main")}
-              >
-                <Text style={{ color: "#ffffff", fontSize: 17 }}> LOGIN </Text>
-              </TouchableOpacity>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: 20
-                }}
-              >
+              <View>
                 <TouchableOpacity
-                  style={{}}
                   activeOpacity={0.5}
-                  onPress={() => this.props.navigation.navigate("Login")}
+                  onPress={() => this.props.navigation.navigate("Forget")}
+                  style={styles.btnForgetPasswordStyle}
                 >
-                  <Text style={{ color: "#2B2828" }}>
-                    New to Capi Restaurant?
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{}}
-                  activeOpacity={0.5}
-                  onPress={() => this.props.navigation.navigate("SignUp")}
-                >
-                  <Text style={{ color: "#33FFC1" }}> SignUp? </Text>
+                  <Text style={{ color: "#33FFC1" }}>Forget Password?</Text>
                 </TouchableOpacity>
               </View>
+
+              <View alignSelf="auto">
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={() => this.props.navigation.navigate("Main")}
+                >
+                  <Text style={{ color: "#ffffff", fontSize: 17 }}>
+                    {" "}
+                    LOGIN{" "}
+                  </Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 20
+                  }}
+                >
+                  <TouchableOpacity
+                    style={{}}
+                    activeOpacity={0.5}
+                    onPress={() => this.props.navigation.navigate("Login")}
+                  >
+                    <Text style={{ color: "#2B2828" }}>
+                      New to Capi Restaurant?
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{}}
+                    activeOpacity={0.5}
+                    onPress={() => this.props.navigation.navigate("SignUp")}
+                  >
+                    <Text style={{ color: "#33FFC1" }}> SignUp? </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }

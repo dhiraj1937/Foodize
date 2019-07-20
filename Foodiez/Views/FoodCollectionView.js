@@ -9,7 +9,8 @@ import {
   ListView,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 
 export default class FoodCollectionView extends Component {
@@ -140,65 +141,67 @@ export default class FoodCollectionView extends Component {
 
   render() {
     return (
-      <View
-        style={{
-          backgroundColor: "white"
-        }}
-      >
+      <SafeAreaView>
         <View
           style={{
-            flex: 0,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 40,
-            marginLeft: 10,
-            marginBottom: 10
+            backgroundColor: "white"
           }}
         >
           <View
             style={{
-              flex: 1,
+              flex: 0,
               flexDirection: "row",
-              alignItems: "center"
+              justifyContent: "flex-start",
+              marginTop: 40,
+              marginLeft: 10,
+              marginBottom: 10
             }}
           >
-            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-              <Image
-                style={styles.backImageStyle}
-                source={require("../Images/leftarrow.png")}
-              />
-            </TouchableOpacity>
-            <View>
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: "black",
-                  marginLeft: 10,
-                  fontWeight: "bold"
-                }}
-              >
-                Collection
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: "gray",
-                  marginLeft: 10
-                }}
-              >
-                By Jacky West
-              </Text>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center"
+              }}
+            >
+              <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+                <Image
+                  style={styles.backImageStyle}
+                  source={require("../Images/leftarrow.png")}
+                />
+              </TouchableOpacity>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: "black",
+                    marginLeft: 10,
+                    fontWeight: "bold"
+                  }}
+                >
+                  Collection
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: "gray",
+                    marginLeft: 10
+                  }}
+                >
+                  By Jacky West
+                </Text>
+              </View>
             </View>
           </View>
+          <GridView
+            dataSource={this.state.dataSource}
+            removeClippedSubviews={false}
+            spacing={8}
+            style={{ padding: 16 }}
+            renderCell={this._renderCell.bind(this)}
+          />
         </View>
-        <GridView
-          dataSource={this.state.dataSource}
-          removeClippedSubviews={false}
-          spacing={8}
-          style={{ padding: 16 }}
-          renderCell={this._renderCell.bind(this)}
-        />
-      </View>
+      </SafeAreaView>
     );
   }
 }

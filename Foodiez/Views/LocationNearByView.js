@@ -10,7 +10,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ListView
+  ListView,
+  SafeAreaView
 } from "react-native";
 
 export default class LocationNearByView extends Component {
@@ -88,227 +89,229 @@ export default class LocationNearByView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={{ backgroundColor: "white" }}>
-        <View
-          style={{
-            flex: 0,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 50,
-            marginLeft: 20
-          }}
-        >
-          <Image
-            style={{ width: 20, height: 20, marginRight: 10 }}
-            source={require("./../Images/leftarrow.png")}
-          />
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Near By</Text>
+      <SafeAreaView>
+        <View style={{ backgroundColor: "white" }}>
           <View
             style={{
-              flex: 1,
-              alignItems: "flex-end"
+              flex: 0,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              marginTop: 20,
+              marginLeft: 20
             }}
           >
-            <TouchableOpacity onPress={() => this._onChangeViewType()}>
-              <Image
-                style={{ width: 20, height: 20, marginRight: 20 }}
-                source={this.state.headerImage}
-              />
-            </TouchableOpacity>
+            <Image
+              style={{ width: 20, height: 20, marginRight: 10 }}
+              source={require("./../Images/leftarrow.png")}
+            />
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>Near By</Text>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-end"
+              }}
+            >
+              <TouchableOpacity onPress={() => this._onChangeViewType()}>
+                <Image
+                  style={{ width: 20, height: 20, marginRight: 20 }}
+                  source={this.state.headerImage}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View style={{ marginLeft: 50 }}>
-          <Text
+          <View style={{ marginLeft: 50 }}>
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: "bold",
+                color: "gray"
+              }}
+            >
+              34 Places
+            </Text>
+          </View>
+          <View style={styles.separatorStyle} />
+          <View
             style={{
-              fontSize: 12,
-              fontWeight: "bold",
-              color: "gray"
+              flex: 0,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              marginTop: 10,
+              marginLeft: 20
             }}
           >
-            34 Places
-          </Text>
-        </View>
-        <View style={styles.separatorStyle} />
-        <View
-          style={{
-            flex: 0,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 10,
-            marginLeft: 20
-          }}
-        >
-          <Image
-            style={{ width: 20, height: 20, marginRight: 10 }}
-            source={require("./../Images/location.png")}
+            <Image
+              style={{ width: 20, height: 20, marginRight: 10 }}
+              source={require("./../Images/location.png")}
+            />
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>Sydney SBD</Text>
+          </View>
+          <SearchBar
+            round
+            searchIcon={{ size: 24 }}
+            placeholder="Search for restaurants..."
+            lightTheme={true}
+            containerStyle={styles.SearchBarStyle}
+            inputContainerStyle={styles.SearchBarInputContainerStyle}
           />
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Sydney SBD</Text>
-        </View>
-        <SearchBar
-          round
-          searchIcon={{ size: 24 }}
-          placeholder="Search for restaurants..."
-          lightTheme={true}
-          containerStyle={styles.SearchBarStyle}
-          inputContainerStyle={styles.SearchBarInputContainerStyle}
-        />
-        <ScrollView style={styles.container}>
-          {this.state.IsShowList ? (
-            <View style={{ hide: this.state.IsShowList }}>
-              <ListView
-                dataSource={this.state.dataSource}
-                separatorStyle="none"
-                style={{
-                  height: (Dimensions.get("window").height * 70) / 100
-                }}
-                renderRow={data => (
-                  <TouchableOpacity
-                    activeOpacity={0.4}
-                    onPress={this.clickedItemText.bind(this, data)}
-                  >
-                    <View
-                      style={{
-                        alignContent: "center",
-                        backgroundColor: "#f5f5f5"
-                      }}
+          <ScrollView style={styles.container}>
+            {this.state.IsShowList ? (
+              <View style={{ hide: this.state.IsShowList }}>
+                <ListView
+                  dataSource={this.state.dataSource}
+                  separatorStyle="none"
+                  style={{
+                    height: (Dimensions.get("window").height * 70) / 100
+                  }}
+                  renderRow={data => (
+                    <TouchableOpacity
+                      activeOpacity={0.4}
+                      onPress={this.clickedItemText.bind(this, data)}
                     >
-                      <View style={styles.listItemStyle}>
-                        <View
-                          style={{
-                            flex: 0,
-                            flexDirection: "row",
-                            alignContent: "center",
-                            alignItems: "center"
-                          }}
-                        >
-                          <Image
-                            source={require("./../Images/food2.png")}
-                            style={{
-                              width: 80,
-                              height: 80,
-                              borderRadius: 10,
-                              borderColor: "#f5f5f5",
-                              borderWidth: 1,
-                              marginLeft: 10
-                            }}
-                          />
+                      <View
+                        style={{
+                          alignContent: "center",
+                          backgroundColor: "#f5f5f5"
+                        }}
+                      >
+                        <View style={styles.listItemStyle}>
                           <View
                             style={{
-                              justifyContent: "center",
-                              marginLeft: 5,
-                              marginRight: 5,
-                              marginTop: 10,
-                              marginBottom: 10
-                            }}
-                          >
-                            <Text
-                              style={{
-                                color: "gray",
-                                fontSize: 10,
-                                flex: 0,
-                                flexWrap: "wrap",
-                                width: Dimensions.get("window").width - 200,
-                                marginBottom: 10
-                              }}
-                            >
-                              11:30 AM to 11PM
-                            </Text>
-                            <Text
-                              style={{
-                                color: "black",
-                                fontSize: 13,
-                                fontWeight: "bold",
-                                flex: 0,
-                                flexWrap: "wrap",
-                                width: Dimensions.get("window").width - 200,
-                                marginBottom: 10
-                              }}
-                            >
-                              Good Thai
-                            </Text>
-                            <Text
-                              style={{
-                                color: "gray",
-                                fontSize: 10,
-                                flex: 0,
-                                flexWrap: "wrap",
-                                width: Dimensions.get("window").width - 200
-                              }}
-                            >
-                              20 Queen street, NSW Asian, Thai
-                            </Text>
-                          </View>
-                          <View
-                            style={{
-                              alignContent: "flex-end",
-                              marginLeft: 15,
+                              flex: 0,
+                              flexDirection: "row",
+                              alignContent: "center",
                               alignItems: "center"
                             }}
                           >
+                            <Image
+                              source={require("./../Images/food2.png")}
+                              style={{
+                                width: 80,
+                                height: 80,
+                                borderRadius: 10,
+                                borderColor: "#f5f5f5",
+                                borderWidth: 1,
+                                marginLeft: 10
+                              }}
+                            />
                             <View
                               style={{
-                                borderRadius: 5,
-                                backgroundColor: "#ffcc2a",
-                                height: 30,
-                                alignItems: "center",
-                                marginTop: 20
+                                justifyContent: "center",
+                                marginLeft: 5,
+                                marginRight: 5,
+                                marginTop: 10,
+                                marginBottom: 10
                               }}
                             >
                               <Text
                                 style={{
                                   color: "gray",
-                                  fontSize: 13,
-                                  height: 30,
-                                  width: 50,
-                                  fontWeight: "bold",
-                                  textAlign: "center",
-                                  textAlignVertical: "center",
-                                  marginTop: 5,
+                                  fontSize: 10,
+                                  flex: 0,
+                                  flexWrap: "wrap",
+                                  width: Dimensions.get("window").width - 200,
                                   marginBottom: 10
                                 }}
                               >
-                                4.3
+                                11:30 AM to 11PM
+                              </Text>
+                              <Text
+                                style={{
+                                  color: "black",
+                                  fontSize: 13,
+                                  fontWeight: "bold",
+                                  flex: 0,
+                                  flexWrap: "wrap",
+                                  width: Dimensions.get("window").width - 200,
+                                  marginBottom: 10
+                                }}
+                              >
+                                Good Thai
+                              </Text>
+                              <Text
+                                style={{
+                                  color: "gray",
+                                  fontSize: 10,
+                                  flex: 0,
+                                  flexWrap: "wrap",
+                                  width: Dimensions.get("window").width - 200
+                                }}
+                              >
+                                20 Queen street, NSW Asian, Thai
                               </Text>
                             </View>
                             <View
                               style={{
-                                justifyContent: "center",
-                                alignItems: "flex-end",
-                                height: 80
+                                alignContent: "flex-end",
+                                marginLeft: 15,
+                                alignItems: "center"
                               }}
                             >
-                              <Image
-                                source={require("./../Images/bookmarkgreen.png")}
+                              <View
                                 style={{
-                                  width: 20,
-                                  height: 20
+                                  borderRadius: 5,
+                                  backgroundColor: "#ffcc2a",
+                                  height: 30,
+                                  alignItems: "center",
+                                  marginTop: 20
                                 }}
-                              />
+                              >
+                                <Text
+                                  style={{
+                                    color: "gray",
+                                    fontSize: 13,
+                                    height: 30,
+                                    width: 50,
+                                    fontWeight: "bold",
+                                    textAlign: "center",
+                                    textAlignVertical: "center",
+                                    marginTop: 5,
+                                    marginBottom: 10
+                                  }}
+                                >
+                                  4.3
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  justifyContent: "center",
+                                  alignItems: "flex-end",
+                                  height: 80
+                                }}
+                              >
+                                <Image
+                                  source={require("./../Images/bookmarkgreen.png")}
+                                  style={{
+                                    width: 20,
+                                    height: 20
+                                  }}
+                                />
+                              </View>
                             </View>
                           </View>
                         </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {this.state.IsShowMap ? (
-            <View style={styles.mapViewStyle}>
-              <MapView
-                style={styles.mapViewStyle}
-                initialRegion={{
-                  latitude: 37.78825,
-                  longitude: -122.4324,
-                  latitudeDelta: 0.0922,
-                  longitudeDelta: 0.0421
-                }}
-              />
-            </View>
-          ) : null}
-        </ScrollView>
-      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {this.state.IsShowMap ? (
+              <View style={styles.mapViewStyle}>
+                <MapView
+                  style={styles.mapViewStyle}
+                  initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421
+                  }}
+                />
+              </View>
+            ) : null}
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }

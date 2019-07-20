@@ -9,7 +9,8 @@ import {
     Image,
     Dimensions,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    SafeAreaView
 } from "react-native";
 import { List } from "react-native-paper";
 
@@ -61,6 +62,7 @@ export default class TrendingFoodView extends Component {
 
     render() {
         return (
+            <SafeAreaView>
             <View>
                 <ScrollView>
                     <View style={styles.container}>
@@ -293,6 +295,7 @@ export default class TrendingFoodView extends Component {
                     }}
                 />
             </View>
+            </SafeAreaView>
         );
     }
 }

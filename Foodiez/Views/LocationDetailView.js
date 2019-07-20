@@ -9,7 +9,8 @@ import {
   ListView,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 
 export default class LocationDetailView extends Component {
@@ -177,205 +178,209 @@ export default class LocationDetailView extends Component {
 
   render() {
     return (
-      <View
-        style={{
-          backgroundColor: "white"
-        }}
-      >
+      <SafeAreaView>
         <View
           style={{
-            flex: 0,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 40,
-            marginLeft: 10,
-            marginBottom: 10
+            backgroundColor: "white"
           }}
         >
-          <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-              <Image
-                style={styles.backImageStyle}
-                source={require("../Images/leftarrow.png")}
-              />
-            </TouchableOpacity>
-            <Text style={{ fontSize: 14, color: "gray", marginLeft: 10 }}>
-              Your Location
-            </Text>
+          <View
+            style={{
+              flex: 0,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              marginTop: 20,
+              marginLeft: 10,
+              marginBottom: 10
+            }}
+          >
             <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                alignItems: "flex-end",
-                justifyContent: "flex-end"
-              }}
+              style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
             >
               <TouchableOpacity onPress={() => this.props.navigation.pop()}>
                 <Image
-                  style={{ width: 20, height: 20, marginRight: 20 }}
-                  source={require("../Images/doorbell.png")}
+                  style={styles.backImageStyle}
+                  source={require("../Images/leftarrow.png")}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-                <Image
-                  style={{ width: 20, height: 20, marginRight: 20 }}
-                  source={require("../Images/add.png")}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <Text
-          style={{
-            fontSize: 20,
-            color: "#000",
-            fontWeight: "bold",
-            marginLeft: 50,
-            marginBottom: 20
-          }}
-        >
-          {this.props.navigation.state.params.item.name}
-        </Text>
-        <SearchBar
-          round
-          searchIcon={{ size: 24 }}
-          placeholder="Search for restaurants..."
-          lightTheme={true}
-          containerStyle={styles.SearchBarStyle}
-          inputContainerStyle={styles.SearchBarInputContainerStyle}
-        />
-
-        <ListView
-          dataSource={this.state.dataSource}
-          separatorStyle="none"
-          removeClippedSubviews={false}
-          style={{
-            height: (Dimensions.get("window").height * 68) / 100
-          }}
-          renderRow={dataHeader => (
-            <View
-              style={{
-                alignContent: "center",
-                backgroundColor: "#f5f5f5"
-              }}
-            >
+              <Text style={{ fontSize: 14, color: "gray", marginLeft: 10 }}>
+                Your Location
+              </Text>
               <View
                 style={{
                   flex: 1,
                   flexDirection: "row",
-                  marginTop: 10
+                  alignItems: "flex-end",
+                  justifyContent: "flex-end"
                 }}
               >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "#000",
-                    fontWeight: "bold",
-                    marginLeft: 15,
-                    marginBottom: 0
-                  }}
-                >
-                  {dataHeader.name}
-                </Text>
-                <TouchableOpacity
+                <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+                  <Image
+                    style={{ width: 20, height: 20, marginRight: 20 }}
+                    source={require("../Images/doorbell.png")}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+                  <Image
+                    style={{ width: 20, height: 20, marginRight: 20 }}
+                    source={require("../Images/add.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+          <Text
+            style={{
+              fontSize: 20,
+              color: "#000",
+              fontWeight: "bold",
+              marginLeft: 50,
+              marginBottom: 20
+            }}
+          >
+            {this.props.navigation.state.params.item.name}
+          </Text>
+          <SearchBar
+            round
+            searchIcon={{ size: 24 }}
+            placeholder="Search for restaurants..."
+            lightTheme={true}
+            containerStyle={styles.SearchBarStyle}
+            inputContainerStyle={styles.SearchBarInputContainerStyle}
+          />
+
+          <ListView
+            dataSource={this.state.dataSource}
+            separatorStyle="none"
+            removeClippedSubviews={false}
+            style={{
+              height: (Dimensions.get("window").height * 68) / 100
+            }}
+            renderRow={dataHeader => (
+              <View
+                style={{
+                  alignContent: "center",
+                  backgroundColor: "#f5f5f5"
+                }}
+              >
+                <View
                   style={{
                     flex: 1,
-                    alignItems: "flex-end",
-                    justifyContent: "flex-end",
-                    marginRight: 15
-                  }}
-                  onPress={() => {
-                    if (dataHeader.type == 2) {
-                      this.props.navigation.navigate("TrendingFoodView");
-                    } else {
-                      this.props.navigation.navigate("FoodCollection");
-                    }
+                    flexDirection: "row",
+                    marginTop: 10
                   }}
                 >
                   <Text
                     style={{
-                      fontSize: 15,
-                      color: "#4c7f7f",
-                      marginLeft: 20,
-                      marginBottom: 20
+                      fontSize: 20,
+                      color: "#000",
+                      fontWeight: "bold",
+                      marginLeft: 15,
+                      marginBottom: 0
                     }}
                   >
-                    See all
+                    {dataHeader.name}
                   </Text>
-                </TouchableOpacity>
-              </View>
-              <ListView
-                dataSource={dataHeader.foods}
-                separatorStyle="none"
-                horizontal={true}
-                removeClippedSubviews={false}
-                showsHorizontalScrollIndicator={false}
-                style={{
-                  height: 220,
-                  marginLeft: 5,
-                  marginRight: 5
-                }}
-                renderRow={data => (
                   <TouchableOpacity
-                    style={{ marginLeft: 10, marginRight: 10 }}
-                    activeOpacity={0.4}
-                    onPress={this.clickedItemText.bind(this, data)}
+                    style={{
+                      flex: 1,
+                      alignItems: "flex-end",
+                      justifyContent: "flex-end",
+                      marginRight: 15
+                    }}
+                    onPress={() => {
+                      if (dataHeader.type == 2) {
+                        this.props.navigation.navigate("TrendingFoodView");
+                      } else {
+                        this.props.navigation.navigate("FoodCollection");
+                      }
+                    }}
                   >
-                    {dataHeader.name === "Meal Deals" ? (
-                      this._renderCell(data)
-                    ) : dataHeader.name === "Papular Restaurants" ? (
-                      this._renderCellForPopularRes(data)
-                    ) : dataHeader.name === "Favorites Cuisines" ? (
-                      <CustomCellFav
-                        boxTitle1="Asian"
-                        boxTitle2="France"
-                        bgColor1="#6495ed"
-                        bgColor2="#ffcc2a"
-                        style={{ height: 200 }}
-                      />
-                    ) : (
-                      <View style={styles.listItemStyle}>
-                        <View>
-                          <View style={styles.itemImageStyle}>
-                            <Image
-                              style={{ width: 180, height: 120 }}
-                              source={data.img}
-                            />
-                          </View>
-                          <Text
-                            style={{
-                              fontSize: 16,
-                              fontWeight: "bold",
-                              marginLeft: 5,
-                              marginRight: 5,
-                              marginTop: 5,
-                              marginBottom: 5
-                            }}
-                          >
-                            KFC Boradway
-                          </Text>
-                          <Text
-                            style={{
-                              fontSize: 12,
-                              color: "gray",
-                              marginLeft: 5,
-                              marginRight: 5,
-                              marginTop: 5,
-                              marginBottom: 15
-                            }}
-                          >
-                            123 Qeen Street, {"\n"}SydneyAustralian Cafe
-                          </Text>
-                        </View>
-                      </View>
-                    )}
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        color: "#4c7f7f",
+                        marginLeft: 20,
+                        marginBottom: 20
+                      }}
+                    >
+                      See all
+                    </Text>
                   </TouchableOpacity>
-                )}
-              />
-            </View>
-          )}
-        />
-      </View>
+                </View>
+                <ListView
+                  dataSource={dataHeader.foods}
+                  separatorStyle="none"
+                  horizontal={true}
+                  removeClippedSubviews={false}
+                  showsHorizontalScrollIndicator={false}
+                  style={{
+                    height: 220,
+                    marginLeft: 5,
+                    marginRight: 5
+                  }}
+                  renderRow={data => (
+                    <TouchableOpacity
+                      style={{ marginLeft: 10, marginRight: 10 }}
+                      activeOpacity={0.4}
+                      onPress={this.clickedItemText.bind(this, data)}
+                    >
+                      {dataHeader.name === "Meal Deals" ? (
+                        this._renderCell(data)
+                      ) : dataHeader.name === "Papular Restaurants" ? (
+                        this._renderCellForPopularRes(data)
+                      ) : dataHeader.name === "Favorites Cuisines" ? (
+                        <CustomCellFav
+                          boxTitle1="Asian"
+                          boxTitle2="France"
+                          bgColor1="#6495ed"
+                          bgColor2="#ffcc2a"
+                          style={{ height: 200 }}
+                        />
+                      ) : (
+                        <View style={styles.listItemStyle}>
+                          <View>
+                            <View style={styles.itemImageStyle}>
+                              <Image
+                                style={{ width: 180, height: 120 }}
+                                source={data.img}
+                              />
+                            </View>
+                            <Text
+                              style={{
+                                fontSize: 16,
+                                fontWeight: "bold",
+                                marginLeft: 5,
+                                marginRight: 5,
+                                marginTop: 5,
+                                marginBottom: 5
+                              }}
+                            >
+                              KFC Boradway
+                            </Text>
+                            <Text
+                              style={{
+                                fontSize: 12,
+                                color: "gray",
+                                marginLeft: 5,
+                                marginRight: 5,
+                                marginTop: 5,
+                                marginBottom: 15
+                              }}
+                            >
+                              123 Qeen Street, {"\n"}SydneyAustralian Cafe
+                            </Text>
+                          </View>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            )}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }

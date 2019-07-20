@@ -9,7 +9,8 @@ import {
   Dimensions,
   TouchableOpacity,
   ListView,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 
 export default class TopFoodView extends Component {
@@ -74,216 +75,218 @@ export default class TopFoodView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={styles.container}>
-        <View
-          style={{
-            alignItems: "flex-start",
-            flexDirection: "row",
-            flex: 0,
-            marginLeft: 20,
-            marginTop: 50
-          }}
-        >
-          <TouchableOpacity>
-            <Image
-              style={styles.backImageStyle}
-              source={require("../Images/trophy.png")}
-            />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 10 }}>
-            Top Foodies
-          </Text>
-        </View>
-        <View style={styles.headerSeperatorStyle} />
-        <View style={styles.topHeaderTabStyle}>
-          <TouchableOpacity
-            onPress={() => this._onSelectedTab(0)}
-            style={styles.tabTouchableStyle}
+      <SafeAreaView>
+        <View style={styles.container}>
+          <View
+            style={{
+              alignItems: "flex-start",
+              flexDirection: "row",
+              flex: 0,
+              marginLeft: 20,
+              marginTop: 20
+            }}
           >
-            <Text
-              ref={ref => (this.txtTitleTab1 = ref)}
-              style={{
-                fontSize: 17,
-                fontWeight: "bold",
-                color: this.state.colorTab1
-              }}
-            >
-              Reviews
+            <TouchableOpacity>
+              <Image
+                style={styles.backImageStyle}
+                source={require("../Images/trophy.png")}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 10 }}>
+              Top Foodies
             </Text>
-            <Text
-              ref={"txtCountTab1"}
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                color: this.state.colorTab1
-              }}
+          </View>
+          <View style={styles.headerSeperatorStyle} />
+          <View style={styles.topHeaderTabStyle}>
+            <TouchableOpacity
+              onPress={() => this._onSelectedTab(0)}
+              style={styles.tabTouchableStyle}
             >
-              (100)
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this._onSelectedTab(1)}
-            style={styles.tabTouchableStyle}
-          >
-            <Text
-              ref={"txtTitleTab2"}
-              style={{
-                fontSize: 17,
-                fontWeight: "bold",
-                color: this.state.colorTab2
-              }}
+              <Text
+                ref={ref => (this.txtTitleTab1 = ref)}
+                style={{
+                  fontSize: 17,
+                  fontWeight: "bold",
+                  color: this.state.colorTab1
+                }}
+              >
+                Reviews
+              </Text>
+              <Text
+                ref={"txtCountTab1"}
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  color: this.state.colorTab1
+                }}
+              >
+                (100)
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onSelectedTab(1)}
+              style={styles.tabTouchableStyle}
             >
-              Photos
-            </Text>
-            <Text
-              ref={"txtCountTab2"}
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                color: this.state.colorTab2
-              }}
+              <Text
+                ref={"txtTitleTab2"}
+                style={{
+                  fontSize: 17,
+                  fontWeight: "bold",
+                  color: this.state.colorTab2
+                }}
+              >
+                Photos
+              </Text>
+              <Text
+                ref={"txtCountTab2"}
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  color: this.state.colorTab2
+                }}
+              >
+                (100)
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onSelectedTab(2)}
+              style={styles.tabTouchableStyle}
             >
-              (100)
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this._onSelectedTab(2)}
-            style={styles.tabTouchableStyle}
-          >
-            <Text
-              ref={"txtTitleTab3"}
-              style={{
-                fontSize: 17,
-                fontWeight: "bold",
-                color: this.state.colorTab3
-              }}
-            >
-              Bloggers
-            </Text>
-            <Text
-              ref={"txtCountTab3"}
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                color: this.state.colorTab3
-              }}
-            >
-              (100)
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{ marginTop: 0, backgroundColor: "lightgray", height: 2 }}
-        />
-        <ListView
-          dataSource={this.state.dataSource}
-          separatorStyle="none"
-          style={{
-            height: (Dimensions.get("window").height * 68) / 100,
-            marginTop: 10
-          }}
-          renderRow={data => (
-            <View
-              style={{
-                alignContent: "center",
-                backgroundColor: "#f5f5f5"
-              }}
-            >
-              <View style={styles.listItemStyle}>
-                <View
-                  style={{
-                    flex: 0,
-                    flexDirection: "row",
-                    alignContent: "center",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: Dimensions.get("window").width
-                  }}
-                >
-                  <Image
-                    source={require("./../Images/userprofile.png")}
-                    style={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: 30,
-                      borderColor: "#dfdfdf",
-                      borderWidth: 1,
-                      marginLeft: 10
-                    }}
-                  />
+              <Text
+                ref={"txtTitleTab3"}
+                style={{
+                  fontSize: 17,
+                  fontWeight: "bold",
+                  color: this.state.colorTab3
+                }}
+              >
+                Bloggers
+              </Text>
+              <Text
+                ref={"txtCountTab3"}
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  color: this.state.colorTab3
+                }}
+              >
+                (100)
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{ marginTop: 0, backgroundColor: "lightgray", height: 2 }}
+          />
+          <ListView
+            dataSource={this.state.dataSource}
+            separatorStyle="none"
+            style={{
+              height: (Dimensions.get("window").height * 68) / 100,
+              marginTop: 10
+            }}
+            renderRow={data => (
+              <View
+                style={{
+                  alignContent: "center",
+                  backgroundColor: "#f5f5f5"
+                }}
+              >
+                <View style={styles.listItemStyle}>
                   <View
                     style={{
-                      justifyContent: "center",
-                      marginLeft: 5,
-                      marginRight: 5,
-                      marginTop: 10,
-                      marginBottom: 10,
-                      alignItems: "center"
+                      flex: 0,
+                      flexDirection: "row",
+                      alignContent: "center",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: Dimensions.get("window").width
                     }}
                   >
-                    <Text
+                    <Image
+                      source={require("./../Images/userprofile.png")}
                       style={{
-                        color: "black",
-                        fontSize: 17,
-                        fontWeight: "bold",
-                        flex: 0,
-                        flexWrap: "wrap",
-                        width: Dimensions.get("window").width - 160
+                        width: 60,
+                        height: 60,
+                        borderRadius: 30,
+                        borderColor: "#dfdfdf",
+                        borderWidth: 1,
+                        marginLeft: 10
                       }}
-                    >
-                      Good Thai
-                    </Text>
-
-                    <Text
+                    />
+                    <View
                       style={{
-                        color: "gray",
-                        fontSize: 14,
-                        flex: 0,
-                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        marginLeft: 5,
+                        marginRight: 5,
                         marginTop: 10,
-                        width: Dimensions.get("window").width - 160
+                        marginBottom: 10,
+                        alignItems: "center"
                       }}
                     >
-                      20 Queen street, NSW Asian, Thai.
-                    </Text>
-                    <Text
-                      style={{
-                        color: "#ffcc2a",
-                        fontSize: 13,
-                        flex: 0,
-                        flexWrap: "wrap",
-                        marginTop: 10,
-                        width: Dimensions.get("window").width - 160
-                      }}
-                    >
-                      Gold Foodies
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 5,
-                      alignItems: "flex-end",
-                      marginRight: 10
-                    }}
-                  >
-                    <TouchableOpacity style={styles.followTouchable}>
                       <Text
                         style={{
-                          fontSize: 13,
+                          color: "black",
+                          fontSize: 17,
                           fontWeight: "bold",
-                          color: "#4c7f7f"
+                          flex: 0,
+                          flexWrap: "wrap",
+                          width: Dimensions.get("window").width - 160
                         }}
                       >
-                        Follow
+                        Good Thai
                       </Text>
-                    </TouchableOpacity>
+
+                      <Text
+                        style={{
+                          color: "gray",
+                          fontSize: 14,
+                          flex: 0,
+                          flexWrap: "wrap",
+                          marginTop: 10,
+                          width: Dimensions.get("window").width - 160
+                        }}
+                      >
+                        20 Queen street, NSW Asian, Thai.
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#ffcc2a",
+                          fontSize: 13,
+                          flex: 0,
+                          flexWrap: "wrap",
+                          marginTop: 10,
+                          width: Dimensions.get("window").width - 160
+                        }}
+                      >
+                        Gold Foodies
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        marginLeft: 5,
+                        alignItems: "flex-end",
+                        marginRight: 10
+                      }}
+                    >
+                      <TouchableOpacity style={styles.followTouchable}>
+                        <Text
+                          style={{
+                            fontSize: 13,
+                            fontWeight: "bold",
+                            color: "#4c7f7f"
+                          }}
+                        >
+                          Follow
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-          )}
-        />
-      </View>
+            )}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }

@@ -8,46 +8,56 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 
 export default class ForgetPasswordView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <View
-            style={{ alignItems: "flex-start", marginLeft: 20, marginTop: 40 }}
-          >
-            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-              <Image
-                style={styles.backImageStyle}
-                source={require("../Images/back.png")}
-              />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.header}>Forget Password?</Text>
-          <Text style={styles.headerSub}>Retrive Your Password</Text>
-          <View style={styles.containerInside}>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Email"
-              keyboardType="email-address"
-            />
-            <View style={styles.separatorStyle} />
-            <View alignSelf="auto">
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={() => this.props.navigation.navigate("Login")}
-              >
-                <Text style={{ color: "#ffffff", fontSize: 17 }}> SUBMIT </Text>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <ScrollView>
+            <View
+              style={{
+                alignItems: "flex-start",
+                marginLeft: 20,
+                marginTop: 20
+              }}
+            >
+              <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+                <Image
+                  style={styles.backImageStyle}
+                  source={require("../Images/back.png")}
+                />
               </TouchableOpacity>
             </View>
-          </View>
-        </ScrollView>
-      </View>
+            <Text style={styles.header}>Forget Password?</Text>
+            <Text style={styles.headerSub}>Retrive Your Password</Text>
+            <View style={styles.containerInside}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Email"
+                keyboardType="email-address"
+              />
+              <View style={styles.separatorStyle} />
+              <View alignSelf="auto">
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={() => this.props.navigation.navigate("Login")}
+                >
+                  <Text style={{ color: "#ffffff", fontSize: 17 }}>
+                    {" "}
+                    SUBMIT{" "}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }

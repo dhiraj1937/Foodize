@@ -9,7 +9,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  SafeAreaView
 } from "react-native";
 import { List } from "react-native-paper";
 
@@ -60,239 +61,241 @@ export default class FavoriteCuisinesView extends Component {
 
   render() {
     return (
-      <View>
-        <ScrollView>
-          <View style={{}}>
-            <View style={styles.itemImageStyle}>
-              <Image
-                style={{ height: 300, width: Dimensions.get("window").width }}
-                source={require("../Images/food2.png")}
-              />
-              <TouchableOpacity
-                style={styles.backImageStyle}
-                onPress={() => this.props.navigation.pop()}
-              >
+      <SafeAreaView>
+        <View>
+          <ScrollView>
+            <View style={{}}>
+              <View style={styles.itemImageStyle}>
                 <Image
-                  style={styles.backImageStyle}
-                  source={require("../Images/leftarrow.png")}
+                  style={{ height: 300, width: Dimensions.get("window").width }}
+                  source={require("../Images/food2.png")}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.ShareImageStyle}
-                onPress={() => this.props.navigation.pop()}
-              >
-                <Text
+                <TouchableOpacity
+                  style={styles.backImageStyle}
+                  onPress={() => this.props.navigation.pop()}
+                >
+                  <Image
+                    style={styles.backImageStyle}
+                    source={require("../Images/leftarrow.png")}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.ShareImageStyle}
+                  onPress={() => this.props.navigation.pop()}
+                >
+                  <Text
+                    style={{
+                      marginLeft: 0,
+                      fontWeight: "bold",
+                      color: "#fff"
+                    }}
+                  >
+                    Share
+                  </Text>
+                </TouchableOpacity>
+                <View
                   style={{
                     marginLeft: 0,
                     fontWeight: "bold",
-                    color: "#fff"
+                    color: "#fff",
+                    position: "absolute",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    top: 120,
+                    left: Dimensions.get("window").width / 4.0,
+                    width: 200,
+                    flexWrap: "wrap"
                   }}
                 >
-                  Share
-                </Text>
-              </TouchableOpacity>
-              <View
-                style={{
-                  marginLeft: 0,
-                  fontWeight: "bold",
-                  color: "#fff",
-                  position: "absolute",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  top: 120,
-                  left: Dimensions.get("window").width / 4.0,
-                  width: 200,
-                  flexWrap: "wrap"
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 25,
-                    color: "white",
-                    fontWeight: "bold",
-                    textAlign: "center"
-                  }}
-                >
-                  Asian Restaurants
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                fontSize: 18,
-                backgroundColor: "#f5f5f5",
-                marginBottom: 2,
-                alignItems: "center"
-              }}
-            >
-              <View>
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    fontWeight: "bold",
-                    fontSize: 18
-                  }}
-                >
-                  20 Restaurants
-                </Text>
+                  <Text
+                    style={{
+                      fontSize: 25,
+                      color: "white",
+                      fontWeight: "bold",
+                      textAlign: "center"
+                    }}
+                  >
+                    Asian Restaurants
+                  </Text>
+                </View>
               </View>
               <View
                 style={{
-                  marginTop: 20,
-                  marginBottom: 20,
-                  marginRight: 10,
                   flex: 1,
                   flexDirection: "row",
-                  justifyContent: "flex-end"
+                  fontSize: 18,
+                  backgroundColor: "#f5f5f5",
+                  marginBottom: 2,
+                  alignItems: "center"
                 }}
               >
-                <TouchableOpacity onPress={this.showScaleAnimationDialog}>
+                <View>
                   <Text
                     style={{
                       marginLeft: 10,
                       fontWeight: "bold",
-                      color: "#4c7f7f"
+                      fontSize: 18
                     }}
                   >
-                    Filter
+                    20 Restaurants
                   </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <ListView
-              dataSource={this.state.dataSource}
-              separatorStyle="none"
-              style={{
-                height: (Dimensions.get("window").height * 70) / 100
-              }}
-              renderRow={data => (
+                </View>
                 <View
                   style={{
-                    alignContent: "center",
-                    backgroundColor: "#f5f5f5"
+                    marginTop: 20,
+                    marginBottom: 20,
+                    marginRight: 10,
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "flex-end"
                   }}
                 >
-                  <View style={styles.listItemStyle}>
-                    <View
+                  <TouchableOpacity onPress={this.showScaleAnimationDialog}>
+                    <Text
                       style={{
-                        flex: 1,
-                        flexDirection: "row",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-between"
+                        marginLeft: 10,
+                        fontWeight: "bold",
+                        color: "#4c7f7f"
                       }}
                     >
+                      Filter
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <ListView
+                dataSource={this.state.dataSource}
+                separatorStyle="none"
+                style={{
+                  height: (Dimensions.get("window").height * 70) / 100
+                }}
+                renderRow={data => (
+                  <View
+                    style={{
+                      alignContent: "center",
+                      backgroundColor: "#f5f5f5"
+                    }}
+                  >
+                    <View style={styles.listItemStyle}>
                       <View
                         style={{
-                          justifyContent: "center",
-                          marginLeft: 10,
-                          marginRight: 5,
-                          marginTop: 10,
-                          marginBottom: 10
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: "gray",
-                            fontSize: 10,
-                            flex: 0,
-                            flexWrap: "wrap",
-                            width: Dimensions.get("window").width - 200,
-                            marginBottom: 10
-                          }}
-                        >
-                          11:30 AM to 11PM
-                        </Text>
-                        <Text
-                          style={{
-                            color: "black",
-                            fontSize: 13,
-                            fontWeight: "bold",
-                            flex: 0,
-                            flexWrap: "wrap",
-                            width: Dimensions.get("window").width - 200,
-                            marginBottom: 10
-                          }}
-                        >
-                          Good Thai
-                        </Text>
-                        <Text
-                          style={{
-                            color: "gray",
-                            fontSize: 10,
-                            flex: 0,
-                            flexWrap: "wrap",
-                            width: Dimensions.get("window").width - 200
-                          }}
-                        >
-                          20 Queen street, NSW Asian, Thai
-                        </Text>
-                      </View>
-                      <View
-                        style={{
+                          flex: 1,
+                          flexDirection: "row",
                           alignContent: "center",
-                          justifyContent: "flex-end",
-                          marginRight: 10
+                          alignItems: "center",
+                          justifyContent: "space-between"
                         }}
                       >
                         <View
                           style={{
-                            borderRadius: 5,
-                            backgroundColor: "#ffcc2a",
-                            height: 30,
-                            alignItems: "center",
-                            marginTop: 20
+                            justifyContent: "center",
+                            marginLeft: 10,
+                            marginRight: 5,
+                            marginTop: 10,
+                            marginBottom: 10
                           }}
                         >
                           <Text
                             style={{
                               color: "gray",
-                              fontSize: 13,
-                              height: 30,
-                              width: 50,
-                              fontWeight: "bold",
-                              textAlign: "center",
-                              textAlignVertical: "center",
-                              marginTop: 5,
+                              fontSize: 10,
+                              flex: 0,
+                              flexWrap: "wrap",
+                              width: Dimensions.get("window").width - 200,
                               marginBottom: 10
                             }}
                           >
-                            4.3
+                            11:30 AM to 11PM
+                          </Text>
+                          <Text
+                            style={{
+                              color: "black",
+                              fontSize: 13,
+                              fontWeight: "bold",
+                              flex: 0,
+                              flexWrap: "wrap",
+                              width: Dimensions.get("window").width - 200,
+                              marginBottom: 10
+                            }}
+                          >
+                            Good Thai
+                          </Text>
+                          <Text
+                            style={{
+                              color: "gray",
+                              fontSize: 10,
+                              flex: 0,
+                              flexWrap: "wrap",
+                              width: Dimensions.get("window").width - 200
+                            }}
+                          >
+                            20 Queen street, NSW Asian, Thai
                           </Text>
                         </View>
                         <View
                           style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: 80
+                            alignContent: "center",
+                            justifyContent: "flex-end",
+                            marginRight: 10
                           }}
                         >
-                          <Image
-                            source={require("./../Images/bookmarkgreen.png")}
+                          <View
                             style={{
-                              width: 20,
-                              height: 20
+                              borderRadius: 5,
+                              backgroundColor: "#ffcc2a",
+                              height: 30,
+                              alignItems: "center",
+                              marginTop: 20
                             }}
-                          />
+                          >
+                            <Text
+                              style={{
+                                color: "gray",
+                                fontSize: 13,
+                                height: 30,
+                                width: 50,
+                                fontWeight: "bold",
+                                textAlign: "center",
+                                textAlignVertical: "center",
+                                marginTop: 5,
+                                marginBottom: 10
+                              }}
+                            >
+                              4.3
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: 80
+                            }}
+                          >
+                            <Image
+                              source={require("./../Images/bookmarkgreen.png")}
+                              style={{
+                                width: 20,
+                                height: 20
+                              }}
+                            />
+                          </View>
                         </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              )}
-            />
-          </View>
-        </ScrollView>
-        <FilterPopupView
-          IsShowPopup={this.state.IsShowPopup}
-          onClose={() => {
-            this.setState({ IsShowPopup: false });
-          }}
-        />
-      </View>
+                )}
+              />
+            </View>
+          </ScrollView>
+          <FilterPopupView
+            IsShowPopup={this.state.IsShowPopup}
+            onClose={() => {
+              this.setState({ IsShowPopup: false });
+            }}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }

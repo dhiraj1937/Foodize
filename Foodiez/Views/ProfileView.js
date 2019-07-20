@@ -10,7 +10,8 @@ import {
   TouchableOpacity,
   TextInput,
   ProgressBarAndroid,
-  ProgressViewIOS
+  ProgressViewIOS,
+  SafeAreaView
 } from "react-native";
 
 export default class ProfileView extends Component {
@@ -24,7 +25,7 @@ export default class ProfileView extends Component {
               color: "white",
               fontSize: 20,
               fontWeight: "bold",
-              marginTop: 40
+              marginTop: 20
             }}
           >
             Silver Level

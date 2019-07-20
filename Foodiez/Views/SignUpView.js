@@ -8,7 +8,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 
 import Geocoder from "react-native-geocoding";
@@ -29,69 +30,74 @@ export default class SignUpView extends Component {
     let screenWidth = Dimensions.get("window").width;
     Geocoder.init("AIzaSyC5irPen_RngFnsgih9L3X2sbvWRQWogIU");
     return (
-      <View style={styles.container}>
-        <View
-          style={{
-            flex: 0,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 40,
-            marginLeft: 10
-          }}
-        >
-          <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-            <Image
-              style={styles.backImageStyle}
-              source={require("../Images/back.png")}
-            />
-          </TouchableOpacity>
-
-          <Text
+      <SafeAreaView>
+        <View style={styles.container}>
+          <View
             style={{
-              fontSize: 18,
-              color: "#000",
-              fontWeight: "bold",
-              marginTop: 5
+              flex: 0,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              marginTop: 20,
+              marginLeft: 10
             }}
           >
-            Sign Up
-          </Text>
-        </View>
-        <ScrollView>
-          <View style={styles.containerInside}>
-            <TextInput style={styles.inputStyle} placeholder="Full Name" />
-            <View style={styles.separatorStyle} />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Email"
-              keyboardType="email-address"
-            />
-            <View style={styles.separatorStyle} />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Password"
-              secureTextEntry={true}
-            />
-            <View style={styles.separatorStyle} />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Address"
-              secureTextEntry={false}
-              onChangeText={this.handleAddress}
-            />
-            <View style={styles.separatorStyle} />
-            <View alignSelf="auto">
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={() => this.props.navigation.navigate("Main")}
-              >
-                <Text style={{ color: "#ffffff", fontSize: 17 }}> Submit </Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+              <Image
+                style={styles.backImageStyle}
+                source={require("../Images/back.png")}
+              />
+            </TouchableOpacity>
+
+            <Text
+              style={{
+                fontSize: 18,
+                color: "#000",
+                fontWeight: "bold",
+                marginTop: 5
+              }}
+            >
+              Sign Up
+            </Text>
           </View>
-        </ScrollView>
-      </View>
+          <ScrollView>
+            <View style={styles.containerInside}>
+              <TextInput style={styles.inputStyle} placeholder="Full Name" />
+              <View style={styles.separatorStyle} />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Email"
+                keyboardType="email-address"
+              />
+              <View style={styles.separatorStyle} />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              <View style={styles.separatorStyle} />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Address"
+                secureTextEntry={false}
+                onChangeText={this.handleAddress}
+              />
+              <View style={styles.separatorStyle} />
+              <View alignSelf="auto">
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={() => this.props.navigation.navigate("Main")}
+                >
+                  <Text style={{ color: "#ffffff", fontSize: 17 }}>
+                    {" "}
+                    Submit{" "}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }

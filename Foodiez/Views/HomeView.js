@@ -8,34 +8,37 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 
 export default class HomeView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.header}>Hi, Nice to meet you!</Text>
-          <Text style={styles.headerSub}>
-            Set your location to start exploring restaurants around you
-          </Text>
-          <View style={styles.containerInside}>
-            <View alignSelf="auto">
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={() => this.props.navigation.navigate("LocationList")}
-              >
-                <Text style={{ color: "#ffffff", fontSize: 17 }}>
-                  User Current Location
-                </Text>
-              </TouchableOpacity>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <ScrollView>
+            <Text style={styles.header}>Hi, Nice to meet you!</Text>
+            <Text style={styles.headerSub}>
+              Set your location to start exploring restaurants around you
+            </Text>
+            <View style={styles.containerInside}>
+              <View alignSelf="auto">
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={() => this.props.navigation.navigate("LocationList")}
+                >
+                  <Text style={{ color: "#ffffff", fontSize: 17 }}>
+                    User Current Location
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }

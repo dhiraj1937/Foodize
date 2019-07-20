@@ -10,7 +10,8 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Alert
+  Alert,
+  SafeAreaView
 } from "react-native";
 
 export default class VerifyNumberView extends Component {
@@ -40,40 +41,42 @@ export default class VerifyNumberView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.header}>Verify Your Number</Text>
-          <Text style={styles.headerSub}>Enter Your Code Here</Text>
-          <View style={styles.inputWrapper3}>
-            <CodeInput
-              ref="codeInputRef1"
-              keyboardType="numeric"
-              codeLength={4}
-              className={"border-b"}
-              compareWithCode="1234"
-              autoFocus={true}
-              codeInputStyle={{
-                fontWeight: "800",
-                color: "#000000",
-                borderColor: "#A9A9A9"
-              }}
-              containerStyle={{ marginTop: 0 }}
-              onFulfill={(isValid, code) => this._onFulfill(code)}
-            />
-          </View>
-          <View style={styles.containerInside}>
-            <View alignSelf="auto">
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={() => this.props.navigation.navigate("Login")}
-              >
-                <Text style={{ color: "#ffffff" }}> Verify Now </Text>
-              </TouchableOpacity>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <ScrollView>
+            <Text style={styles.header}>Verify Your Number</Text>
+            <Text style={styles.headerSub}>Enter Your Code Here</Text>
+            <View style={styles.inputWrapper3}>
+              <CodeInput
+                ref="codeInputRef1"
+                keyboardType="numeric"
+                codeLength={4}
+                className={"border-b"}
+                compareWithCode="1234"
+                autoFocus={true}
+                codeInputStyle={{
+                  fontWeight: "800",
+                  color: "#000000",
+                  borderColor: "#A9A9A9"
+                }}
+                containerStyle={{ marginTop: 0 }}
+                onFulfill={(isValid, code) => this._onFulfill(code)}
+              />
             </View>
-          </View>
-        </ScrollView>
-      </View>
+            <View style={styles.containerInside}>
+              <View alignSelf="auto">
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={() => this.props.navigation.navigate("Login")}
+                >
+                  <Text style={{ color: "#ffffff" }}> Verify Now </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }

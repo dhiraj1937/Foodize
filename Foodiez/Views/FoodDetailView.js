@@ -10,7 +10,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  SafeAreaView
 } from "react-native";
 import { List } from "react-native-paper";
 import { CustomReviewTemplate } from "../CustomViews/CustomReviewTemplate";

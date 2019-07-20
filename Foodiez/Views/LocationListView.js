@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
   Text,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { Component } from "react";
@@ -56,67 +57,69 @@ export default class LocationListView extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <View
-          style={{
-            alignItems: "flex-start",
-            alignItems: "center",
-            marginLeft: 15,
-            marginTop: 50,
-            flexDirection: "row",
-            flex: 0
-          }}
-        >
-          <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-            <Image
-              style={styles.backImageStyle}
-              source={require("../Images/leftarrow.png")}
-            />
-          </TouchableOpacity>
-          <Text style={{ marginLeft: 10, fontWeight: "bold" }}>
-            User Current Location
-          </Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Search The City"
-            secureTextEntry={true}
-          />
-          <View style={styles.separatorStyle} />
-          <Text
+      <SafeAreaView>
+        <View style={styles.container}>
+          <View
             style={{
+              alignItems: "flex-start",
+              alignItems: "center",
               marginLeft: 15,
-              marginTop: 10,
-              fontWeight: "bold",
-              fontSize: 17,
-              marginBottom: 10
+              marginTop: 20,
+              flexDirection: "row",
+              flex: 0
             }}
           >
-            Recently visited countries
-          </Text>
-        </View>
-        <ListView
-          style={styles.container}
-          dataSource={this.state.dataSource}
-          separatorStyle="none"
-          renderRow={data => (
-            <TouchableOpacity
-              style={{ padding: 15 }}
-              activeOpacity={0.4}
-              onPress={this.clickedItemText.bind(this, data)}
-            >
-              <View style={{ alignContent: "center" }}>
-                <View style={styles.listItemStyle}>
-                  <Image style={styles.backImageStyle} source={data.icon} />
-                  <Text style={{ marginLeft: 10 }}>{data.name}</Text>
-                </View>
-                <View style={styles.separatorStyle} />
-              </View>
+            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+              <Image
+                style={styles.backImageStyle}
+                source={require("../Images/leftarrow.png")}
+              />
             </TouchableOpacity>
-          )}
-        />
-      </View>
+            <Text style={{ marginLeft: 10, fontWeight: "bold" }}>
+              User Current Location
+            </Text>
+          </View>
+          <View>
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Search The City"
+              secureTextEntry={true}
+            />
+            <View style={styles.separatorStyle} />
+            <Text
+              style={{
+                marginLeft: 15,
+                marginTop: 10,
+                fontWeight: "bold",
+                fontSize: 17,
+                marginBottom: 10
+              }}
+            >
+              Recently visited countries
+            </Text>
+          </View>
+          <ListView
+            style={styles.container}
+            dataSource={this.state.dataSource}
+            separatorStyle="none"
+            renderRow={data => (
+              <TouchableOpacity
+                style={{ padding: 15 }}
+                activeOpacity={0.4}
+                onPress={this.clickedItemText.bind(this, data)}
+              >
+                <View style={{ alignContent: "center" }}>
+                  <View style={styles.listItemStyle}>
+                    <Image style={styles.backImageStyle} source={data.icon} />
+                    <Text style={{ marginLeft: 10 }}>{data.name}</Text>
+                  </View>
+                  <View style={styles.separatorStyle} />
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }

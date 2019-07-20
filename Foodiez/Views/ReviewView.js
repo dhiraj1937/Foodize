@@ -10,7 +10,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ListView
+  ListView,
+  SafeAreaView
 } from "react-native";
 
 export default class ReviewView extends Component {
@@ -84,202 +85,204 @@ export default class ReviewView extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width;
     return (
-      <View style={{ backgroundColor: "white" }}>
-        <View
-          style={{
-            flex: 0,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 50,
-            marginLeft: 20
-          }}
-        >
-          <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-            <Image
-              style={{ width: 20, height: 20, marginRight: 10 }}
-              source={require("../Images/leftarrow.png")}
-            />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Reviews</Text>
-        </View>
-        <View style={{ marginLeft: 50 }}>
-          <Text
-            style={{
-              fontSize: 12,
-              fontWeight: "bold",
-              color: "gray"
-            }}
-          >
-            Good Thai
-          </Text>
-        </View>
-
-        <View style={styles.mapViewStyle}>
-          <MapView
-            style={styles.mapViewStyle}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
-            }}
-          />
+      <SafeAreaView>
+        <View style={{ backgroundColor: "white" }}>
           <View
             style={{
-              position: "absolute",
-              top: 10,
-              width: Dimensions.get("window").width
+              flex: 0,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              marginTop: 20,
+              marginLeft: 20
             }}
           >
-            <SearchBar
-              round
-              searchIcon={{ size: 24 }}
-              placeholder="Search for restaurants..."
-              lightTheme={true}
-              containerStyle={styles.SearchBarStyle}
-              inputContainerStyle={styles.SearchBarInputContainerStyle}
-            />
-            <View
-              style={{
-                alignContent: "center",
-                backgroundColor: "#f5f5f5"
-              }}
-            />
+            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+              <Image
+                style={{ width: 20, height: 20, marginRight: 10 }}
+                source={require("../Images/leftarrow.png")}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>Reviews</Text>
           </View>
-        </View>
-        <View>
-          <View style={styles.listItemStyle}>
-            <View
+          <View style={{ marginLeft: 50 }}>
+            <Text
               style={{
-                flex: 0,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                backgroundColor: "#fff",
-                height: 200,
-                width: Dimensions.get("window").width,
-                justifyContent: "flex-start",
-                marginTop: 10
+                fontSize: 12,
+                fontWeight: "bold",
+                color: "gray"
               }}
             >
-              <Image
-                source={require("./../Images/food2.png")}
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: 10,
-                  borderColor: "#f5f5f5",
-                  borderWidth: 1,
-                  marginLeft: 10,
-                  marginTop: 10
-                }}
+              Good Thai
+            </Text>
+          </View>
+
+          <View style={styles.mapViewStyle}>
+            <MapView
+              style={styles.mapViewStyle}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
+              }}
+            />
+            <View
+              style={{
+                position: "absolute",
+                top: 10,
+                width: Dimensions.get("window").width
+              }}
+            >
+              <SearchBar
+                round
+                searchIcon={{ size: 24 }}
+                placeholder="Search for restaurants..."
+                lightTheme={true}
+                containerStyle={styles.SearchBarStyle}
+                inputContainerStyle={styles.SearchBarInputContainerStyle}
               />
               <View
                 style={{
-                  marginLeft: 15,
-                  marginTop: 10,
-                  width: "50%"
+                  alignContent: "center",
+                  backgroundColor: "#f5f5f5"
                 }}
-              >
-                <Text
-                  style={{
-                    color: "gray",
-                    fontSize: 10,
-                    height: 30
-                  }}
-                >
-                  11:30 AM to 11PM
-                </Text>
-                <Text
-                  style={{
-                    color: "black",
-                    fontSize: 13,
-                    fontWeight: "bold",
-                    height: 30
-                  }}
-                >
-                  Good Thai
-                </Text>
-                <Text
-                  style={{
-                    color: "gray",
-                    fontSize: 10,
-                    height: 30,
-                    width: 100,
-                    flexWrap: "wrap"
-                  }}
-                >
-                  20 Queen street, NSW Asian, Thai
-                </Text>
-                <View
-                  style={{
-                    left: "0%",
-                    marginTop: 5
-                  }}
-                >
-                  <View
-                    style={{
-                      flex: 0,
-                      flexDirection: "row"
-                    }}
-                  >
-                    <View>
-                      <TouchableOpacity>
-                        <Image
-                          style={{ width: 15, height: 15, marginRight: 10 }}
-                          source={require("./../Images/mapmarker.png")}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                    <View>
-                      <Text
-                        style={{
-                          color: "#4c7f7f",
-                          fontSize: 12
-                        }}
-                      >
-                        Open In Apple Maps
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
+              />
+            </View>
+          </View>
+          <View>
+            <View style={styles.listItemStyle}>
               <View
                 style={{
-                  marginRight: 15,
-                  width: 50
+                  flex: 0,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  backgroundColor: "#fff",
+                  height: 200,
+                  width: Dimensions.get("window").width,
+                  justifyContent: "flex-start",
+                  marginTop: 10
                 }}
               >
+                <Image
+                  source={require("./../Images/food2.png")}
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 10,
+                    borderColor: "#f5f5f5",
+                    borderWidth: 1,
+                    marginLeft: 10,
+                    marginTop: 10
+                  }}
+                />
                 <View
                   style={{
-                    borderRadius: 5,
-                    backgroundColor: "#ffcc2a",
-                    height: 30,
-                    alignItems: "center",
-                    marginTop: 20
+                    marginLeft: 15,
+                    marginTop: 10,
+                    width: "50%"
                   }}
                 >
                   <Text
                     style={{
                       color: "gray",
-                      fontSize: 13,
-                      height: 30,
-                      width: 50,
-                      fontWeight: "bold",
-                      textAlign: "center",
-                      textAlignVertical: "center",
-                      marginTop: 5,
-                      marginBottom: 10
+                      fontSize: 10,
+                      height: 30
                     }}
                   >
-                    4.3
+                    11:30 AM to 11PM
                   </Text>
+                  <Text
+                    style={{
+                      color: "black",
+                      fontSize: 13,
+                      fontWeight: "bold",
+                      height: 30
+                    }}
+                  >
+                    Good Thai
+                  </Text>
+                  <Text
+                    style={{
+                      color: "gray",
+                      fontSize: 10,
+                      height: 30,
+                      width: 100,
+                      flexWrap: "wrap"
+                    }}
+                  >
+                    20 Queen street, NSW Asian, Thai
+                  </Text>
+                  <View
+                    style={{
+                      left: "0%",
+                      marginTop: 5
+                    }}
+                  >
+                    <View
+                      style={{
+                        flex: 0,
+                        flexDirection: "row"
+                      }}
+                    >
+                      <View>
+                        <TouchableOpacity>
+                          <Image
+                            style={{ width: 15, height: 15, marginRight: 10 }}
+                            source={require("./../Images/mapmarker.png")}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                      <View>
+                        <Text
+                          style={{
+                            color: "#4c7f7f",
+                            fontSize: 12
+                          }}
+                        >
+                          Open In Apple Maps
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    marginRight: 15,
+                    width: 50
+                  }}
+                >
+                  <View
+                    style={{
+                      borderRadius: 5,
+                      backgroundColor: "#ffcc2a",
+                      height: 30,
+                      alignItems: "center",
+                      marginTop: 20
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "gray",
+                        fontSize: 13,
+                        height: 30,
+                        width: 50,
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        textAlignVertical: "center",
+                        marginTop: 5,
+                        marginBottom: 10
+                      }}
+                    >
+                      4.3
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
