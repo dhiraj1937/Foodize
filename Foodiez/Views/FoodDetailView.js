@@ -13,6 +13,7 @@ import {
   ScrollView
 } from "react-native";
 import { List } from "react-native-paper";
+import { CustomReviewTemplate } from "../CustomViews/CustomReviewTemplate";
 
 export default class FoodDetailView extends Component {
   constructor(props) {
@@ -213,7 +214,7 @@ export default class FoodDetailView extends Component {
                 removeClippedSubviews={false}
                 showsHorizontalScrollIndicator={false}
                 renderRow={data => (
-                  <TouchableOpacity style={{ padding: 15 }} activeOpacity={0.4}>
+                  <TouchableOpacity style={{ padding: 5 }} activeOpacity={0.4}>
                     <View style={{ alignContent: "center" }}>
                       <View>
                         <View style={styles.addImageStyle}>
@@ -310,6 +311,9 @@ export default class FoodDetailView extends Component {
                 </TouchableOpacity>
               </View>
             </View>
+            <CustomReviewTemplate />
+            <CustomReviewTemplate />
+            <CustomReviewTemplate />
           </View>
         </ScrollView>
       </View>

@@ -178,7 +178,6 @@ export default class LocationNearByView extends Component {
                             flex: 0,
                             flexDirection: "row",
                             alignContent: "center",
-                            justifyContent: "space-between",
                             alignItems: "center"
                           }}
                         >
@@ -196,15 +195,20 @@ export default class LocationNearByView extends Component {
                           <View
                             style={{
                               justifyContent: "center",
-                              marginLeft: 15,
-                              marginTop: 10
+                              marginLeft: 5,
+                              marginRight: 5,
+                              marginTop: 10,
+                              marginBottom: 10
                             }}
                           >
                             <Text
                               style={{
                                 color: "gray",
                                 fontSize: 10,
-                                height: 30
+                                flex: 0,
+                                flexWrap: "wrap",
+                                width: Dimensions.get("window").width - 200,
+                                marginBottom: 10
                               }}
                             >
                               11:30 AM to 11PM
@@ -214,7 +218,10 @@ export default class LocationNearByView extends Component {
                                 color: "black",
                                 fontSize: 13,
                                 fontWeight: "bold",
-                                height: 30
+                                flex: 0,
+                                flexWrap: "wrap",
+                                width: Dimensions.get("window").width - 200,
+                                marginBottom: 10
                               }}
                             >
                               Good Thai
@@ -223,7 +230,9 @@ export default class LocationNearByView extends Component {
                               style={{
                                 color: "gray",
                                 fontSize: 10,
-                                height: 30
+                                flex: 0,
+                                flexWrap: "wrap",
+                                width: Dimensions.get("window").width - 200
                               }}
                             >
                               20 Queen street, NSW Asian, Thai
@@ -338,8 +347,7 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   SearchBarInputContainerStyle: {
-    backgroundColor: "#f5f5f5",
-    fontSize: 16
+    backgroundColor: "#f5f5f5"
   },
   mapViewStyle: {
     width: Dimensions.get("window").width,

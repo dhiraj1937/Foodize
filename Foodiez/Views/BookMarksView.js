@@ -278,5 +278,18 @@ const styles = StyleSheet.create({
   SearchBarInputContainerStyle: {
     backgroundColor: "#f5f5f5"
     //fontSize: 16
+  },
+  listItemStyle: {
+    flexDirection: "row",
+    marginLeft: 15,
+    alignContent: "center",
+    marginRight: 15,
+    marginTop: 10,
+    marginBottom: 5,
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: "#fff"
   }
 });
