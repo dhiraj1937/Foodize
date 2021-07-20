@@ -9,7 +9,7 @@
   "dependencies": {
     "@types/react-native-popup-dialog": "^0.16.2",
     "react": "16.8.3",
-    "react-native": "0.59.9",
+    "react-native": "0.62.3",
     "react-native-check-box": "^2.1.7",
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-easy-grid-view": "^0.1.1",
